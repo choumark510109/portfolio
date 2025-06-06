@@ -64,34 +64,43 @@
       border-radius: 12px;
     }
     /* 首頁光線掃描字體輪廓 */
-    #home h1 {
-      font-family: 'Clash Display', serif;
-      font-size: 3rem;
-      font-weight: 700;
-      position: relative;
-      color: transparent;
-      -webkit-text-stroke: 1px white; /* 字體輪廓 */
-      text-stroke: 1px white;
-      background: linear-gradient(
-        90deg,
-        rgba(255,255,255,0.1) 25%,
-        rgba(255,255,255,1) 50%,
-        rgba(255,255,255,0.1) 75%
-      );
-      background-size: 200% 100%;
-      background-clip: text;
-      -webkit-background-clip: text;
-      animation: light-scan 3s linear infinite;
-      line-height: 1.1;
-    }
-    @keyframes light-scan {
-      0% {
-        background-position: 200% 0;
-      }
-      100% {
-        background-position: -200% 0;
-      }
-    }
+   #home h1 {
+  font-family: 'Clash Display', serif;
+  font-size: 5rem;
+  font-weight: 700;
+  position: relative;
+  color: white;
+  -webkit-text-stroke: 0.8px #b38b00; /* 深金色輪廓 */
+  text-stroke: 0.8px #b38b00;
+
+  background: linear-gradient(
+    90deg,
+    #b38b00 0%,
+    #ffd700 25%,
+    #fffacd 50%,
+    #ffd700 75%,
+    #b38b00 100%
+  );
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+
+  filter: drop-shadow(0 0 2px rgba(255, 215, 0, 0.7));
+
+  animation: light-scan 3s linear infinite;
+  line-height: 1.1;
+}
+
+/* 掃光動畫 */
+@keyframes light-scan {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
     #home h2 {
       margin-top: 1rem;
       font-family: 'Clash Display', serif;
