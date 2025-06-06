@@ -4,26 +4,24 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>CHOU MARCUS Portfolio</title>
+  <!-- GSAP 與 ScrollTrigger CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <style>
     * {
       margin: 0; padding: 0;
       box-sizing: border-box;
       font-family: 'Helvetica Neue', sans-serif;
     }
-
     html, body {
       scroll-behavior: smooth;
       background: #000;
       color: #fff;
       overflow-x: hidden;
     }
-
     body {
       line-height: 1.6;
     }
-
-    /* NAV BAR 設定 */
     .nav {
       position: fixed;
       top: 2rem;
@@ -36,7 +34,6 @@
       padding: 1rem 1.5rem;
       border-radius: 12px;
     }
-
     .nav a {
       color: #ccc;
       text-decoration: none;
@@ -44,11 +41,9 @@
       font-size: 0.9rem;
       transition: color 0.3s ease;
     }
-
     .nav a:hover {
       color: #fff;
     }
-
     section {
       height: 100vh;
       display: flex;
@@ -61,16 +56,13 @@
       max-width: 800px;
       margin: 0 auto;
     }
-
     h1, h2 {
       margin-bottom: 1rem;
     }
-
     p {
       max-width: 600px;
       opacity: 0.85;
     }
-
     .timeline {
       margin-top: 2rem;
       border-left: 2px solid #444;
@@ -78,15 +70,14 @@
       text-align: left;
       width: 100%;
     }
-
     .timeline-item {
       margin-bottom: 2rem;
+      opacity: 0;
+      transform: translateY(50px);
     }
-
     .timeline-item h3 {
       color: #ff6600;
     }
-
     footer {
       text-align: center;
       padding: 2rem;
@@ -142,17 +133,21 @@
     &copy; 2025 Choumark Portfolio. All rights reserved.
   </footer>
 
-  <!-- GSAP 動畫 -->
   <script>
-    gsap.from("section", {
-      opacity: 0,
-      y: 50,
-      duration: 1,
-      stagger: 0.4,
-      scrollTrigger: {
-        trigger: "section",
-        start: "top 80%",
-      }
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.utils.toArray('.timeline-item').forEach(item => {
+      gsap.to(item, {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: item,
+          start: "top 80%",
+          toggleActions: "play none none none",
+        }
+      });
     });
   </script>
 
