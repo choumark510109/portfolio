@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>CHOU MARCUS Portfolio</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <style>
     * {
       margin: 0; padding: 0;
@@ -22,38 +23,32 @@
       line-height: 1.6;
     }
 
+    /* NAV BAR 設定 */
     .nav {
       position: fixed;
-      top: 1.5rem;
-      left: 2rem;
+      top: 2rem;
       right: 2rem;
       display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
+      gap: 2rem;
       z-index: 999;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
     }
 
-    .nav-left {
-      color: #fff;
-      font-weight: bold;
-      line-height: 1.2;
-      font-size: 1rem;
-      white-space: nowrap;
-    }
-
-    .nav-right a {
+    .nav a {
       color: #ccc;
       text-decoration: none;
-      margin-left: 1.5rem;
       font-weight: 500;
       font-size: 0.9rem;
-      transition: color 0.3s;
+      transition: color 0.3s ease;
     }
 
-    .nav-right a:hover {
+    .nav a:hover {
       color: #fff;
     }
-    
+
     section {
       height: 100vh;
       display: flex;
@@ -65,19 +60,15 @@
       text-align: center;
       max-width: 800px;
       margin: 0 auto;
-      opacity: 0;
-      transform: translateY(50px);
     }
 
     h1, h2 {
       margin-bottom: 1rem;
-      color: #ff6600;
     }
 
     p {
       max-width: 600px;
       opacity: 0.85;
-      font-weight: 300;
     }
 
     .timeline {
@@ -86,7 +77,6 @@
       padding-left: 2rem;
       text-align: left;
       width: 100%;
-      max-width: 600px;
     }
 
     .timeline-item {
@@ -95,22 +85,6 @@
 
     .timeline-item h3 {
       color: #ff6600;
-    }
-
-    .arrow {
-      position: absolute;
-      bottom: 2rem;
-      font-size: 2rem;
-      opacity: 0.5;
-      animation: bounce 1.5s infinite;
-      left: 50%;
-      transform: translateX(-50%);
-      user-select: none;
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translate(-50%, 0); }
-      50% { transform: translate(-50%, 10px); }
     }
 
     footer {
@@ -125,24 +99,20 @@
 
   <!-- 導覽列 -->
   <div class="nav">
-    <div class="nav-left">CHOU<br>MARCUS</div>
-    <div class="nav-right">
-      <a href="#home">首頁</a>
-      <a href="#portfolio">作品</a>
-      <a href="#about">關於</a>
-    </div>
+    <a href="#home">首頁</a>
+    <a href="#portfolio">作品</a>
+    <a href="#about">關於</a>
   </div>
 
   <!-- 首頁區塊 -->
-  <section id="home" class="animate-section">
+  <section id="home">
     <h1>CHOU<br>MARCUS</h1>
     <h2>品牌行銷 × 品味設計</h2>
     <p>用視覺與內容打造有靈魂的品牌印象。</p>
-    <div class="arrow">↓</div>
   </section>
 
   <!-- 作品區塊 -->
-  <section id="portfolio" class="animate-section">
+  <section id="portfolio">
     <h2>作品經歷</h2>
     <div class="timeline">
       <div class="timeline-item">
@@ -158,11 +128,10 @@
         <p>結合美學與定位，打造高質感形象。</p>
       </div>
     </div>
-    <div class="arrow">↓</div>
   </section>
 
   <!-- 關於我 -->
-  <section id="about" class="animate-section">
+  <section id="about">
     <h2>聯絡資訊</h2>
     <p>Email：choumark@example.com</p>
     <p>Instagram：@choumark</p>
@@ -173,25 +142,17 @@
     &copy; 2025 Choumark Portfolio. All rights reserved.
   </footer>
 
-  <!-- GSAP + ScrollTrigger -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
+  <!-- GSAP 動畫 -->
   <script>
-    gsap.registerPlugin(ScrollTrigger);
-
-    gsap.utils.toArray('.animate-section').forEach(section => {
-      gsap.to(section, {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: section,
-          start: "top 80%",
-          toggleActions: "play none none reverse"
-        }
-      });
+    gsap.from("section", {
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      stagger: 0.4,
+      scrollTrigger: {
+        trigger: "section",
+        start: "top 80%",
+      }
     });
   </script>
 
