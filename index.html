@@ -2,213 +2,150 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MARCUS Portfolio</title>
-<style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Helvetica Neue', sans-serif;
-  }
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CHOU MARCUS Portfolio</title>
+  <style>
+    * {
+      margin: 0; padding: 0;
+      box-sizing: border-box;
+      font-family: 'Helvetica Neue', sans-serif;
+    }
 
-  body {
-    background: #000000;
-    color: #ffffff;
-    line-height: 1.6;
-  }
+    html, body {
+      scroll-behavior: smooth;
+      background: #000;
+      color: #fff;
+      overflow-x: hidden;
+    }
 
-  header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background: #111111;
-    padding: 1rem 2rem;
-    border-bottom: 1px solid #444444;
-    z-index: 1000;
-  }
+    body {
+      line-height: 1.6;
+    }
 
-  nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1000px;
-    margin: 0 auto;
-  }
+    .nav {
+      position: fixed;
+      top: 1.5rem;
+      right: 2rem;
+      z-index: 999;
+    }
 
-  .nav-title {
-    font-weight: bold;
-    font-size: 1.2rem;
-  }
+    .nav a {
+      color: #ccc;
+      text-decoration: none;
+      margin-left: 1.5rem;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: color 0.3s;
+    }
 
-  .nav-links a {
-    margin-left: 2rem;
-    text-decoration: none;
-    color: #ddd;
-    font-weight: 500;
-  }
+    .nav a:hover {
+      color: #fff;
+    }
 
-  .nav-links a:hover {
-    color: #fff;
-  }
+    section {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      position: relative;
+      text-align: center;
+    }
 
-  main {
-    padding: 6rem 2rem 2rem;
-    max-width: 1000px;
-    margin: auto;
-  }
+    h1, h2 {
+      margin-bottom: 1rem;
+    }
 
-  section {
-    margin-bottom: 3rem;
-  }
+    p {
+      max-width: 600px;
+      opacity: 0.85;
+    }
 
-  h2 {
-    margin-bottom: 1rem;
-  }
+    .timeline {
+      margin-top: 2rem;
+      border-left: 2px solid #444;
+      padding-left: 2rem;
+    }
 
-  /* 時間軸樣式 */
-  .timeline {
-    margin: 2rem auto;
-    border-left: 3px solid #555;
-    padding-left: 1rem;
-    max-width: 600px;
-  }
+    .timeline-item {
+      margin-bottom: 2rem;
+      text-align: left;
+    }
 
-  .timeline-item {
-    margin-bottom: 2rem;
-    position: relative;
-    background: rgba(255 255 255 / 0.05);
-    padding: 1rem 1rem 1rem 3rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(255 102 0 / 0.15);
-    transition: box-shadow 0.3s ease;
-  }
+    .timeline-item h3 {
+      color: #ff6600;
+    }
 
-  .timeline-item.active {
-    box-shadow: 0 6px 20px rgba(255 102 0 / 0.5);
-    background: rgba(255 102 0 / 0.1);
-  }
+    .arrow {
+      position: absolute;
+      bottom: 2rem;
+      animation: bounce 1.5s infinite;
+      font-size: 2rem;
+      opacity: 0.5;
+    }
 
-  .timeline-date {
-    font-weight: bold;
-    color: #aaa;
-    margin-bottom: 0.25rem;
-    position: absolute;
-    left: -4.5rem;
-    top: 1.25rem;
-    width: 100px;
-    text-align: right;
-    transition: color 0.3s ease;
-    cursor: pointer;
-  }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(10px); }
+    }
 
-  .timeline-date::before {
-    content: '';
-    position: absolute;
-    left: 105%;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 14px;
-    height: 14px;
-    background: #fff;
-    border: 3px solid #555;
-    border-radius: 50%;
-    transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-    opacity: 0.5;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
-  }
-
-  .timeline-item.active .timeline-date,
-  .timeline-date:hover {
-    color: #fff;
-  }
-
-  .timeline-item.active .timeline-date::before,
-  .timeline-date:hover::before {
-    background-color: #ff6600;
-    border-color: #ff6600;
-    transform: scale(1.5);
-    opacity: 1;
-    box-shadow: 0 0 12px #ff6600;
-  }
-
-  /* 其他原本樣式保持 */
-  footer {
-    text-align: center;
-    padding: 2rem;
-    font-size: 0.9rem;
-    color: #888888;
-    background: #111111;
-  }
-</style>
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #888;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <nav>
-      <div class="nav-title">CHOU<br>MARCUS</div>
-      <div class="nav-links">
-        <a href="#home">首頁</a>
-        <a href="#portfolio">作品集</a>
-        <a href="#about">關於我</a>
+
+  <!-- 導覽列 -->
+  <div class="nav">
+    <a href="#home">首頁</a>
+    <a href="#portfolio">作品</a>
+    <a href="#about">關於</a>
+  </div>
+
+  <!-- 首頁區塊 -->
+  <section id="home">
+    <h1>CHOU<br>MARCUS</h1>
+    <h2>品牌行銷 × 品味設計</h2>
+    <p>用視覺與內容打造有靈魂的品牌印象。</p>
+    <div class="arrow">↓</div>
+  </section>
+
+  <!-- 作品區塊 -->
+  <section id="portfolio">
+    <h2>作品經歷</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <h3>2022｜開始接觸品牌行銷</h3>
+        <p>從市場調查到策略規劃，踏上行銷之路。</p>
       </div>
-    </nav>
-  </header>
-
-  <main>
-    <section id="home">
-      <h2>品牌行銷 × 品味設計</h2>
-      <p>Brand Marketing 塑造品牌力。</p>
-
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-date">2022</div>
-          <div class="timeline-content">
-            <h3>開始接觸品牌行銷</h3>
-            <p>從基礎市場調查到策略規劃，踏上行銷之路。</p>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-date">2023</div>
-          <div class="timeline-content">
-            <h3>影片剪輯技能提升</h3>
-            <p>掌握剪輯工具，完成多個品牌短片項目。</p>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-date">2024</div>
-          <div class="timeline-content">
-            <h3>品牌視覺設計專案</h3>
-            <p>結合視覺美學與品牌定位，打造高質感形象。</p>
-          </div>
-        </div>
+      <div class="timeline-item">
+        <h3>2023｜影片剪輯技能提升</h3>
+        <p>掌握剪輯工具，完成多個品牌短片項目。</p>
       </div>
-    </section>
+      <div class="timeline-item">
+        <h3>2024｜品牌視覺設計專案</h3>
+        <p>結合美學與定位，打造高質感形象。</p>
+      </div>
+    </div>
+    <div class="arrow">↓</div>
+  </section>
 
-  </main>
+  <!-- 關於我 -->
+  <section id="about">
+    <h2>聯絡資訊</h2>
+    <p>Email：choumark@example.com</p>
+    <p>Instagram：@choumark</p>
+    <p>歡迎聯繫我，一起打造有感的內容與品牌。</p>
+  </section>
 
   <footer>
     &copy; 2025 Choumark Portfolio. All rights reserved.
   </footer>
-
-<script>
-  const items = document.querySelectorAll('.timeline-item');
-
-  function checkActiveItems() {
-    const triggerBottom = window.innerHeight / 2;
-
-    items.forEach(item => {
-      const rect = item.getBoundingClientRect();
-      if (rect.top < triggerBottom && rect.bottom > triggerBottom) {
-        item.classList.add('active');
-      } else {
-        item.classList.remove('active');
-      }
-    });
-  }
-
-  window.addEventListener('scroll', checkActiveItems);
-  window.addEventListener('load', checkActiveItems);
-</script>
 
 </body>
 </html>
