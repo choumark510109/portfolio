@@ -1,102 +1,196 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Your Name - Portfolio</title>
+  <title>CHOU MARCUS Portfolio</title>
+  <!-- Google Fonts: Clash Display -->
+  <link href="https://fonts.googleapis.com/css2?family=Clash+Display&display=swap" rel="stylesheet" />
+  <!-- GSAP 與 ScrollTrigger CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-
     * {
-      margin: 0;
-      padding: 0;
+      margin: 0; padding: 0;
       box-sizing: border-box;
+      font-family: 'Helvetica Neue', sans-serif;
     }
-
+    html, body {
+      scroll-behavior: smooth;
+      background: #000 url('https://raw.githubusercontent.com/choumark510109/portfolio/main/%E9%BB%91%E9%87%91%E8%83%8C%E6%99%AF%E5%9C%96.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      overflow-x: hidden;
+      height: 100%;
+      width: 100%;
+    }
     body {
-      background: #0e0e10;
-      color: white;
-      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+    }
+    .nav {
+      position: fixed;
+      top: 2rem;
+      right: 2rem;
       display: flex;
+      gap: 2rem;
+      z-index: 999;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+    }
+    .nav a {
+      color: #ccc;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: color 0.3s ease;
+    }
+    .nav a:hover {
+      color: #fff;
+    }
+    section {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      overflow: hidden;
-    }
-
-    .hero {
-      text-align: center;
       padding: 2rem;
-    }
-
-    .title {
-      font-size: clamp(48px, 8vw, 88px);
       position: relative;
-      display: inline-block;
-      background: linear-gradient(120deg, #ffffff 0%, #999999 50%, #ffffff 100%);
-      background-size: 200%;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+      background: rgba(0,0,0,0.5); /* 半透明底加強文字可讀性 */
+      border-radius: 12px;
+    }
+    /* 首頁光線掃描字體輪廓 */
+    #home h1 {
+      font-family: 'Clash Display', serif;
+      font-size: 5rem;
+      font-weight: 700;
+      position: relative;
+      color: transparent;
+      -webkit-text-stroke: 1px white; /* 字體輪廓 */
+      text-stroke: 1px white;
+      background: linear-gradient(
+        90deg,
+        rgba(255,255,255,0.1) 25%,
+        rgba(255,255,255,1) 50%,
+        rgba(255,255,255,0.1) 75%
+      );
+      background-size: 200% 100%;
       background-clip: text;
       -webkit-background-clip: text;
-      color: transparent;
-      animation: shine 2.5s infinite linear;
+      animation: light-scan 3s linear infinite;
+      line-height: 1.1;
     }
-
-    @keyframes shine {
+    @keyframes light-scan {
       0% {
-        background-position: -200% center;
+        background-position: 200% 0;
       }
       100% {
-        background-position: 200% center;
+        background-position: -200% 0;
       }
     }
-
-    .subtitle {
+    #home h2 {
       margin-top: 1rem;
-      font-size: 1.25rem;
-      color: #c9c9d1;
+      font-family: 'Clash Display', serif;
+      font-weight: 500;
+      font-size: 1.5rem;
+      color: #fff;
     }
-
-    .buttons {
+    p {
+      max-width: 600px;
+      opacity: 0.85;
+      font-size: 1rem;
+    }
+    .timeline {
       margin-top: 2rem;
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      flex-wrap: wrap;
+      border-left: 2px solid #444;
+      padding-left: 2rem;
+      text-align: left;
+      width: 100%;
     }
-
-    .btn {
-      padding: 0.75rem 1.5rem;
-      background-color: #7b61ff;
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: 600;
-      transition: background 0.3s ease;
+    .timeline-item {
+      margin-bottom: 2rem;
+      opacity: 0;
+      transform: translateY(50px);
     }
-
-    .btn:hover {
-      background-color: #5a45d6;
+    .timeline-item h3 {
+      color: #ff6600;
     }
-
-    .btn.ghost {
-      background: transparent;
-      border: 2px solid #7b61ff;
-      color: #7b61ff;
-    }
-
-    .btn.ghost:hover {
-      background-color: rgba(123, 97, 255, 0.1);
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #888;
     }
   </style>
 </head>
 <body>
-  <section class="hero">
-    <h1 class="title">Your Name</h1>
-    <p class="subtitle">Visual Editor × Brand Storyteller</p>
-    <div class="buttons">
-      <a href="#works" class="btn">View Works</a>
-      <a href="mailto:your@email.com" class="btn ghost">Contact</a>
+
+  <!-- 導覽列 -->
+  <div class="nav">
+    <a href="#home">首頁</a>
+    <a href="#portfolio">作品</a>
+    <a href="#about">關於</a>
+  </div>
+
+  <!-- 首頁區塊 -->
+  <section id="home">
+    <h1>CHOU<br>MARCUS</h1>
+    <h2>品牌行銷 × 品味設計</h2>
+    <p>用視覺與內容打造有靈魂的品牌印象。</p>
+  </section>
+
+  <!-- 作品區塊 -->
+  <section id="portfolio">
+    <h2>作品經歷</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <h3>2022｜開始接觸品牌行銷</h3>
+        <p>從市場調查到策略規劃，踏上行銷之路。</p>
+      </div>
+      <div class="timeline-item">
+        <h3>2023｜影片剪輯技能提升</h3>
+        <p>掌握剪輯工具，完成多個品牌短片項目。</p>
+      </div>
+      <div class="timeline-item">
+        <h3>2024｜品牌視覺設計專案</h3>
+        <p>結合美學與定位，打造高質感形象。</p>
+      </div>
     </div>
   </section>
+
+  <!-- 關於我 -->
+  <section id="about">
+    <h2>聯絡資訊</h2>
+    <p>Email：choumark@example.com</p>
+    <p>Instagram：@choumark</p>
+    <p>歡迎聯繫我，一起打造有感的內容與品牌。</p>
+  </section>
+
+  <footer>
+    &copy; 2025 Choumark Portfolio. All rights reserved.
+  </footer>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.utils.toArray('.timeline-item').forEach(item => {
+      gsap.to(item, {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: item,
+          start: "top 80%",
+          toggleActions: "play none none none",
+        }
+      });
+    });
+  </script>
+
 </body>
 </html>
