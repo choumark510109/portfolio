@@ -5,78 +5,68 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>CHOU MARCUS</title>
   <style>
-    /* 重置樣式 */
     * {
       margin: 0; padding: 0;
       box-sizing: border-box;
     }
+
     html, body {
       height: 100%;
-      font-family: 'Helvetica Neue', sans-serif;
       overflow: hidden;
-      background: black;
+      font-family: 'Helvetica Neue', sans-serif;
     }
 
-    /* 背景影片 */
-    .bg-video {
-      position: fixed;
-      top: 50%; left: 50%;
-      min-width: 100%;
-      min-height: 100%;
-      width: auto; height: auto;
-      transform: translate(-50%, -50%);
-      object-fit: cover;
-      z-index: -2;
+    /* 背景圖片 */
+    body {
+      background: url('images/images/home/流動remix.png') no-repeat center center/cover;
+      position: relative;
     }
 
-    /* 黑色遮罩 */
-    .overlay {
-      position: fixed;
+    /* 疊在上面的影片 */
+    .fg-video {
+      position: absolute;
       top: 0; left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      z-index: -1;
+      object-fit: cover;
+      z-index: 0;
+      pointer-events: none; /* 影片不能擋住點擊操作 */
     }
 
-    /* 主要文字內容 */
+    /* 文字內容 */
     .content {
       position: relative;
-      height: 100vh;
+      z-index: 1;
+      height: 100%;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      text-align: center;
+      flex-direction: column;
       color: white;
-      padding: 2rem;
+      text-align: center;
+      background-color: rgba(0,0,0,0.3); /* 半透明遮罩效果，可選 */
     }
 
     .content h1 {
       font-size: 3rem;
-      letter-spacing: 2px;
       margin-bottom: 1rem;
     }
 
     .content p {
-      font-size: 1rem;
+      font-size: 1.2rem;
       max-width: 600px;
-      line-height: 1.6;
     }
   </style>
 </head>
 <body>
 
-  <!-- 背景影片 -->
-  <video autoplay muted loop playsinline class="bg-video">
-    <source src="images/images/home/個人影片.mp4" type="video/mp4">
+  <!-- 疊在背景上的影片 -->
+  <video autoplay muted loop playsinline class="fg-video">
+    <source src="https://raw.githubusercontent.com/choumark510109/portfolio/main/images/images/home/%E5%80%8B%E4%BA%BA%E5%BD%B1%E7%89%87.mp4" type="video/mp4">
     您的瀏覽器不支援影片播放。
   </video>
 
-  <!-- 黑色遮罩 -->
-  <div class="overlay"></div>
-
-  <!-- 主要內容 -->
+  <!-- 中間的文字內容 -->
   <div class="content">
     <h1>CHOU MARCUS</h1>
     <p>用影像與行銷構築視覺靈魂。</p>
