@@ -33,17 +33,14 @@
       z-index: 1000;
     }
 
-    /* LOGO 固定高度與字體大小，字體高度對齊 */
     .logo {
       font-size: 1.2rem;
-      line-height: 40px;  /* 固定高度 */
+      line-height: 40px;
       height: 40px;
       color: white;
       font-weight: bold;
       font-family: 'Noto Sans TC', sans-serif;
       letter-spacing: 0.3em;
-
-      /* Slide-in 動畫 */
       animation: slideIn 0.8s ease forwards;
       opacity: 0;
       transform: translateX(-100%);
@@ -74,7 +71,6 @@
       color: #ccc;
     }
 
-    /* 漢堡選單按鈕 */
     .hamburger {
       display: none;
       flex-direction: column;
@@ -194,55 +190,62 @@
       letter-spacing: 0.4em;
     }
 
-    /* ============ LOGO 區塊樣式 ============ */
-    .work-brand-section {
-      background: #fff;
-      padding: 4rem 2rem;
-      text-align: center;
-    }
-
-    .work-brand-section h2 {
-      font-size: 2rem;
-      font-family: 'Noto Sans TC', sans-serif;
-      letter-spacing: 0.2em;
-
-      /* 跟品牌說明中間多兩個enter距離，大約用 margin-bottom 模擬 */
-      margin-bottom: 3.5rem;
-    }
-
-    .brand-logos {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      gap: 10rem;
-      flex-wrap: wrap;
-    }
-
-    .brand-logo-item {
+    /* ============ 技能區塊樣式 ============ */
+    .skills-section {
+      width: 100%;
       display: flex;
       flex-direction: column;
+    }
+
+    .skill {
+      position: relative;
+      height: 100vh;
+      background-size: cover;
+      background-position: center;
+      display: flex;
       align-items: center;
-      max-width: 150px;
+      justify-content: center;
     }
 
-    .brand-logo-item img {
-      max-height: 35px;
-      max-width: 100%;
-      object-fit: contain;
-      margin-bottom: 2rem;
-      opacity: 0.9;
-      transition: opacity 0.3s ease;
+    .skill::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.45);
+      z-index: 1;
     }
 
-    .brand-logo-item img:hover {
-      opacity: 1;
+    .overlay-text {
+      position: relative;
+      z-index: 2;
+      color: white;
+      text-align: center;
+      padding: 2rem;
+      max-width: 800px;
     }
 
-    .brand-logo-item p {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-size: 0.85rem;
-      color: #444;
+    .overlay-text h2 {
+      font-size: 2.5rem;
+      letter-spacing: 0.2em;
+      margin-bottom: 1rem;
+    }
+
+    .overlay-text p {
+      font-size: 1.1rem;
+      line-height: 1.8;
       letter-spacing: 0.05em;
+      font-family: 'Noto Sans TC', sans-serif;
+    }
+
+    @media (max-width: 768px) {
+      .overlay-text h2 {
+        font-size: 1.8rem;
+      }
+      .overlay-text p {
+        font-size: 0.95rem;
+      }
     }
   </style>
 </head>
@@ -283,20 +286,24 @@
     <p>用影像與行銷構築視覺靈魂</p>
   </div>
 
-  <!-- LOGO 區塊 -->
-<section class="work-brand-section">
-  <div class="brand-logos">
-      <div class="brand-logo-item">
-        <img src="images/logos/twmarmo.png" alt="台灣瑪摩">
-        <p>品牌行銷專員</p>
+  <!-- 技能區塊 -->
+  <section class="skills-section">
+    <div class="skill" style="background-image: url('images/skills/video.jpg');">
+      <div class="overlay-text">
+        <h2>影音製作</h2>
+        <p>從腳本、拍攝到後製，打造風格化的視覺敘事。</p>
       </div>
-      <div class="brand-logo-item">
-        <img src="images/logos/lv.png" alt="LV">
-        <p>銷售顧問 Part-time</p>
+    </div>
+    <div class="skill" style="background-image: url('images/skills/marketing.jpg');">
+      <div class="overlay-text">
+        <h2>行銷企劃</h2>
+        <p>結合創意與策略，打造品牌聲量與社群流量。</p>
       </div>
-      <div class="brand-logo-item">
-        <img src="images/logos/youngchi.png" alt="漾起">
-        <p>行銷公關 Intern</p>
+    </div>
+    <div class="skill" style="background-image: url('images/skills/design.jpg');">
+      <div class="overlay-text">
+        <h2>平面設計</h2>
+        <p>擅長視覺統整與排版設計，強化內容表達。</p>
       </div>
     </div>
   </section>
