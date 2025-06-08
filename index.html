@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>CHOU MARCUS</title>
+
+  <!-- 引入思源黑體 Noto Sans TC -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+
   <style>
     * {
       margin: 0;
@@ -74,8 +78,10 @@
     }
 
     .content p {
+      font-family: 'Noto Sans TC', sans-serif;
       font-size: 1.2rem;
       max-width: 600px;
+      letter-spacing: 0.6em; /* 約等於兩個全形空格 */
     }
   </style>
 </head>
@@ -97,30 +103,30 @@
   </div>
 
   <!-- 控制動畫 -->
-<script>
-  const video = document.getElementById('bgVideo');
-  const image = document.getElementById('bgImage');
+  <script>
+    const video = document.getElementById('bgVideo');
+    const image = document.getElementById('bgImage');
 
-  // 當影片播放結束，淡出影片並顯示圖片
-  video.onended = () => {
-    video.classList.add('fade-out');
-    image.style.opacity = '1';
-  };
+    // 當影片播放結束，淡出影片並顯示圖片
+    video.onended = () => {
+      video.classList.add('fade-out');
+      image.style.opacity = '1';
+    };
 
-  // 影片載入錯誤時，隱藏影片，直接顯示圖片
-  video.onerror = () => {
-    video.style.display = 'none';
-    image.style.opacity = '1';
-  };
-
-  // 5秒內影片若無法播放，自動切換圖片
-  setTimeout(() => {
-    if (video.readyState < 2) {
+    // 影片載入錯誤時，隱藏影片，直接顯示圖片
+    video.onerror = () => {
       video.style.display = 'none';
       image.style.opacity = '1';
-    }
-  }, 5000);
-</script>
+    };
+
+    // 5秒內影片若無法播放，自動切換圖片
+    setTimeout(() => {
+      if (video.readyState < 2) {
+        video.style.display = 'none';
+        image.style.opacity = '1';
+      }
+    }, 5000);
+  </script>
 
 </body>
 </html>
