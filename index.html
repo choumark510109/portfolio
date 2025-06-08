@@ -9,110 +9,68 @@
       margin: 0; padding: 0;
       box-sizing: border-box;
     }
+
     html, body {
       height: 100%;
+      overflow: hidden;
       font-family: 'Helvetica Neue', sans-serif;
-      overflow: hidden;
-      background: black;
     }
 
-    /* 影片容器 */
-    .video-wrapper {
-      position: fixed;
+    /* 背景圖片 */
+    body {
+      background: url('images/images/home/背景.jpg') no-repeat center center/cover;
+      position: relative;
+    }
+
+    /* 疊在上面的影片 */
+    .fg-video {
+      position: absolute;
       top: 0; left: 0;
-      width: 100%; height: 100%;
-      overflow: hidden;
-      z-index: -2;
-    }
-
-    .bg-video {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: opacity 1.5s ease;
+      z-index: 0;
+      pointer-events: none; /* 影片不能擋住點擊操作 */
     }
 
-    .bg-video.fade-out {
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    /* 備用背景圖片 */
-    .bg-image {
-      background-image: url('images/images/home/remix.png');
-      background-size: cover;
-      background-position: center;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -3;
-    }
-
-    /* 黑色遮罩 */
-    .overlay {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      z-index: -1;
-    }
-
-    /* 主文案內容 */
+    /* 文字內容 */
     .content {
       position: relative;
-      height: 100vh;
+      z-index: 1;
+      height: 100%;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      text-align: center;
+      flex-direction: column;
       color: white;
-      padding: 2rem;
+      text-align: center;
+      background-color: rgba(0,0,0,0.3); /* 半透明遮罩效果，可選 */
     }
 
     .content h1 {
       font-size: 3rem;
-      letter-spacing: 2px;
       margin-bottom: 1rem;
     }
 
     .content p {
-      font-size: 1rem;
+      font-size: 1.2rem;
       max-width: 600px;
-      line-height: 1.6;
     }
   </style>
 </head>
 <body>
 
-  <!-- 背景圖片（影片播完後才會顯現） -->
-  <div class="bg-image"></div>
+  <!-- 疊在背景上的影片 -->
+  <video autoplay muted loop playsinline class="fg-video">
+    <source src="https://raw.githubusercontent.com/choumark510109/portfolio/main/images/images/home/%E5%80%8B%E4%BA%BA%E5%BD%B1%E7%89%87.mp4" type="video/mp4">
+    您的瀏覽器不支援影片播放。
+  </video>
 
-  <!-- 背景影片 -->
-  <div class="video-wrapper">
-    <video autoplay muted playsinline class="bg-video" id="introVideo">
-      <source src="images/images/home/personalvideo.mp4" type="video/mp4">
-      您的瀏覽器不支援影片播放。
-    </video>
-  </div>
-
-  <!-- 黑色遮罩 -->
-  <div class="overlay"></div>
-
-  <!-- 主文案 -->
+  <!-- 中間的文字內容 -->
   <div class="content">
     <h1>CHOU MARCUS</h1>
     <p>用影像與行銷構築視覺靈魂。</p>
   </div>
-
-  <script>
-    const video = document.getElementById('introVideo');
-    video.addEventListener('ended', () => {
-      video.classList.add('fade-out');
-    });
-  </script>
 
 </body>
 </html>
