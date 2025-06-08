@@ -29,12 +29,11 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.5rem 3rem;
-      background-color: transparent;
+      padding: 1.5rem 2rem;
       z-index: 1000;
     }
 
-    .navbar .logo {
+    .logo {
       font-size: 1rem;
       color: white;
       font-weight: bold;
@@ -42,12 +41,12 @@
       letter-spacing: 0.3em;
     }
 
-    .navbar .nav-links {
+    .nav-links {
       display: flex;
       gap: 2.5rem;
     }
 
-    .navbar .nav-links a {
+    .nav-links a {
       text-decoration: none;
       color: white;
       font-size: 0.9rem;
@@ -56,8 +55,65 @@
       transition: color 0.3s ease;
     }
 
-    .navbar .nav-links a:hover {
+    .nav-links a:hover {
       color: #ccc;
+    }
+
+    /* 漢堡選單按鈕 */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .hamburger div {
+      width: 25px;
+      height: 2px;
+      background: white;
+      transition: all 0.3s ease;
+    }
+
+    /* 手機版選單 */
+    .mobile-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: rgba(0, 0, 0, 0.85);
+      flex-direction: column;
+      width: 100%;
+      text-align: right;
+      padding: 1.5rem 2rem;
+    }
+
+    .mobile-menu a {
+      padding: 1rem 0;
+      text-decoration: none;
+      color: white;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+      transition: color 0.3s ease;
+    }
+
+    .mobile-menu a:hover {
+      color: #ccc;
+    }
+
+    /* 響應式 */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .mobile-menu.show {
+        display: flex;
+      }
     }
 
     /* 背景容器 */
@@ -117,7 +173,7 @@
       font-family: 'Noto Sans TC', sans-serif;
       font-size: 1rem;
       max-width: 600px;
-      letter-spacing: 0.4em;
+      letter-spacing: 0.6em;
     }
   </style>
 </head>
@@ -127,6 +183,16 @@
   <nav class="navbar">
     <div class="logo">CHOU MARCUS</div>
     <div class="nav-links">
+      <a href="home.html">HOME</a>
+      <a href="work.html">WORK</a>
+      <a href="about.html">ABOUT</a>
+    </div>
+    <div class="hamburger" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
       <a href="home.html">HOME</a>
       <a href="work.html">WORK</a>
       <a href="about.html">ABOUT</a>
@@ -169,6 +235,12 @@
         image.style.opacity = '1';
       }
     }, 5000);
+
+    // 手機選單控制
+    function toggleMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('show');
+    }
   </script>
 
 </body>
