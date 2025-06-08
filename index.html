@@ -33,12 +33,27 @@
       z-index: 1000;
     }
 
+    /* LOGO 固定高度與字體大小，字體高度對齊 */
     .logo {
-      font-size: 1rem;
+      font-size: 1.2rem;
+      line-height: 40px;  /* 固定高度 */
+      height: 40px;
       color: white;
       font-weight: bold;
       font-family: 'Noto Sans TC', sans-serif;
       letter-spacing: 0.3em;
+
+      /* Slide-in 動畫 */
+      animation: slideIn 0.8s ease forwards;
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+
+    @keyframes slideIn {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
     }
 
     .nav-links {
@@ -74,7 +89,6 @@
       transition: all 0.3s ease;
     }
 
-    /* 手機版選單 - 預設隱藏並滑出動畫準備 */
     .mobile-menu {
       position: absolute;
       top: 100%;
@@ -84,19 +98,14 @@
       width: 100%;
       text-align: right;
       padding: 1.5rem 2rem;
-
-      /* 初始隱藏並稍微往上位移 */
       opacity: 0;
       transform: translateY(-20px);
       pointer-events: none;
-
       display: flex;
       flex-direction: column;
-
       transition: all 0.4s ease;
     }
 
-    /* 顯示選單時滑入 */
     .mobile-menu.show {
       opacity: 1;
       transform: translateY(0);
@@ -117,18 +126,15 @@
       color: #ccc;
     }
 
-    /* 響應式 */
     @media (max-width: 768px) {
       .nav-links {
         display: none;
       }
-
       .hamburger {
         display: flex;
       }
     }
 
-    /* 背景容器 */
     .background {
       position: fixed;
       top: 0; left: 0;
@@ -187,6 +193,57 @@
       max-width: 600px;
       letter-spacing: 0.4em;
     }
+
+    /* ============ LOGO 區塊樣式 ============ */
+    .work-brand-section {
+      background: #fff;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .work-brand-section h2 {
+      font-size: 2rem;
+      font-family: 'Noto Sans TC', sans-serif;
+      letter-spacing: 0.2em;
+
+      /* 跟品牌說明中間多兩個enter距離，大約用 margin-bottom 模擬 */
+      margin-bottom: 3.5rem;
+    }
+
+    .brand-logos {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 4rem;
+      flex-wrap: wrap;
+    }
+
+    .brand-logo-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 150px;
+    }
+
+    .brand-logo-item img {
+      max-height: 60px;
+      max-width: 100%;
+      object-fit: contain;
+      margin-bottom: 1rem;
+      opacity: 0.9;
+      transition: opacity 0.3s ease;
+    }
+
+    .brand-logo-item img:hover {
+      opacity: 1;
+    }
+
+    .brand-logo-item p {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 0.85rem;
+      color: #444;
+      letter-spacing: 0.05em;
+    }
   </style>
 </head>
 <body>
@@ -226,6 +283,25 @@
     <p>用影像與行銷構築視覺靈魂</p>
   </div>
 
+  <!-- LOGO 區塊 -->
+  <section class="work-brand-section">
+    <h2>Work Brand</h2>
+    <div class="brand-logos">
+      <div class="brand-logo-item">
+        <img src="images/logos/twmarmo.png" alt="台灣瑪摩">
+        <p>品牌行銷專員</p>
+      </div>
+      <div class="brand-logo-item">
+        <img src="images/logos/lv.png" alt="LV">
+        <p>銷售顧問 Part-time</p>
+      </div>
+      <div class="brand-logo-item">
+        <img src="images/logos/youngchi.png" alt="漾起">
+        <p>行銷公關 Intern</p>
+      </div>
+    </div>
+  </section>
+
   <!-- 控制動畫 -->
   <script>
     const video = document.getElementById('bgVideo');
@@ -248,7 +324,6 @@
       }
     }, 5000);
 
-    // 手機選單控制
     function toggleMenu() {
       const menu = document.getElementById('mobileMenu');
       menu.classList.toggle('show');
