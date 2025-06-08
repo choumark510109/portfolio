@@ -74,9 +74,8 @@
       transition: all 0.3s ease;
     }
 
-    /* 手機版選單 */
+    /* 手機版選單 - 預設隱藏並滑出動畫準備 */
     .mobile-menu {
-      display: none;
       position: absolute;
       top: 100%;
       right: 0;
@@ -85,6 +84,23 @@
       width: 100%;
       text-align: right;
       padding: 1.5rem 2rem;
+
+      /* 初始隱藏並稍微往上位移 */
+      opacity: 0;
+      transform: translateY(-20px);
+      pointer-events: none;
+
+      display: flex;
+      flex-direction: column;
+
+      transition: all 0.4s ease;
+    }
+
+    /* 顯示選單時滑入 */
+    .mobile-menu.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
     }
 
     .mobile-menu a {
@@ -108,10 +124,6 @@
       }
 
       .hamburger {
-        display: flex;
-      }
-
-      .mobile-menu.show {
         display: flex;
       }
     }
