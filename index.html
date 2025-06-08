@@ -203,8 +203,6 @@
       background-size: cover;
       background-position: center;
       display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
     .skill::after {
@@ -218,12 +216,14 @@
     }
 
     .overlay-text {
-      position: relative;
-      z-index: 2;
-      color: white;
-      text-align: center;
-      padding: 2rem;
-      max-width: 800px;
+  position: absolute;
+  bottom: 20px; /* 距離底部 20px */
+  left: 20px;   /* 距離左側 20px */
+  color: white;
+  max-width: 80%; /* 限制最大寬度，避免跑版 */
+  text-align: left;
+  padding: 0; /* 可依需求微調 */
+  z-index: 2;
     }
 
     .overlay-text h2 {
