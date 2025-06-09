@@ -4,95 +4,132 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>CHOU MARCUS Portfolio</title>
-<style>
-  body, html {
-    margin: 0; padding: 0;
-    height: 100%;
-    font-family: 'Noto Sans TC', sans-serif;
-    background-color: #000;
-    color: #fff;
-  }
+  
+  <!-- 引入思源黑體 Noto Sans TC -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
 
-  nav {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%;
-    z-index: 1000;
-    padding: 1.2rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(8px);
-  }
-
-  .nav-brand {
-    font-size: 1rem;
-    letter-spacing: 0.2em;
-    font-weight: 700;
-  }
-
-  .nav-links {
-    display: flex;
-    align-items: center;
-  }
-
-  .nav-links a {
-    margin-left: 1.5rem;
-    color: white;
-    text-decoration: none;
-    font-size: 0.95rem;
-    letter-spacing: 0.1em;
-    transition: color 0.3s ease;
-  }
-
-  .nav-links a:hover,
-  .nav-links a.active {
-    color: #aaa;
-  }
-
-  .nav-links a.active::after {
-    display: none;
-  }
-
-  .menu-toggle {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    gap: 5px;
-  }
-
-  .menu-toggle span {
-    width: 24px;
-    height: 2px;
-    background: white;
-  }
-
-  @media (max-width: 768px) {
-    .nav-links {
-      position: absolute;
-      top: 60px;
-      right: 0;
-      background: rgba(0, 0, 0, 0.9);
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 1rem 2rem;
-      display: none;
-      width: 100%;
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    .nav-links.active {
+    html, body {
+      height: 100%;
+      font-family: 'Helvetica Neue', sans-serif;
+    }
+
+    /* 導覽列 */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
       display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 2rem;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 1.2rem;
+      line-height: 40px;
+      height: 40px;
+      color: white;
+      font-weight: bold;
+      font-family: 'Noto Sans TC', sans-serif;
+      letter-spacing: 0.3em;
+      animation: slideIn 0.8s ease forwards;
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+
+    @keyframes slideIn {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
     }
 
     .nav-links a {
-      margin: 0.5rem 0;
+      text-decoration: none;
+      color: white;
+      font-size: 0.9rem;
+      font-family: 'Noto Sans TC', sans-serif;
+      letter-spacing: 0.15em;
+      transition: color 0.3s ease;
     }
 
-    .menu-toggle {
-      display: flex;
+    .nav-links a:hover {
+      color: #ccc;
     }
-  }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .hamburger div {
+      width: 25px;
+      height: 2px;
+      background: white;
+      transition: all 0.3s ease;
+    }
+
+    .mobile-menu {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: rgba(0, 0, 0, 0.85);
+      flex-direction: column;
+      width: 100%;
+      text-align: right;
+      padding: 1.5rem 2rem;
+      opacity: 0;
+      transform: translateY(-20px);
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.4s ease;
+    }
+
+    .mobile-menu.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .mobile-menu a {
+      padding: 1rem 0;
+      text-decoration: none;
+      color: white;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+      transition: color 0.3s ease;
+    }
+
+    .mobile-menu a:hover {
+      color: #ccc;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      .hamburger {
+        display: flex;
+      }
+    }
 
   .content {
     max-width: 1200px;
