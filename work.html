@@ -1,443 +1,208 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CHOU MARCUS</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CHOU MARCUS Portfolio</title>
+<style>
+  body, html {
+    margin: 0; padding: 0;
+    height: 100%;
+    font-family: 'Noto Sans TC', sans-serif;
+    background-color: #000;
+    color: #fff;
+  }
 
-  <!-- 引入思源黑體 Noto Sans TC -->
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+  .content {
+    max-width: 1200px;
+    margin: 100px auto 60px;
+    padding: 0 1rem;
+    text-align: center;
+  }
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+  h1 {
+    font-size: 3rem;
+    letter-spacing: 0.2em;
+  }
+
+  p.subtitle {
+    font-size: 1.1rem;
+    letter-spacing: 0.3em;
+    margin-bottom: 2rem;
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    gap: 1.5rem;
+  }
+
+  .item {
+    position: relative;
+    cursor: pointer;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.7);
+    transition: transform 0.3s ease;
+  }
+  .item:hover {
+    transform: scale(1.03);
+  }
+
+  .thumb {
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .title-overlay {
+    position: absolute;
+    bottom: 10px; left: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.5);
+    padding: 8px 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    font-size: 1rem;
+    user-select: none;
+  }
+
+  /* 燈箱樣式 */
+  #lightbox {
+    position: fixed;
+    top:0; left:0; right:0; bottom:0;
+    background: rgba(0,0,0,0.85);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    padding: 1rem;
+  }
+
+  #lightbox.active {
+    display: flex;
+  }
+
+  #lightbox iframe {
+    max-width: 90vw;
+    max-height: 80vh;
+    border-radius: 12px;
+    box-shadow: 0 0 20px #000;
+    background: black;
+  }
+
+  #lightbox .close-btn {
+    position: fixed;
+    top: 20px; right: 20px;
+    background: rgba(255,255,255,0.8);
+    color: black;
+    border: none;
+    font-size: 1.4rem;
+    padding: 0.25rem 0.75rem;
+    cursor: pointer;
+    border-radius: 6px;
+    user-select: none;
+  }
+
+  @media(max-width:600px) {
+    h1 {
+      font-size: 2.2rem;
     }
-
-    html, body {
-      height: 100%;
-      font-family: 'Helvetica Neue', sans-serif;
-      background-color: #000;
-      color: #fff;
-    }
-
-    /* 導覽列 */
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.5rem 2rem;
-      z-index: 1000;
-    }
-
-    .logo {
-      font-size: 1.2rem;
-      line-height: 40px;
-      height: 40px;
-      color: white;
-      font-weight: bold;
-      font-family: 'Noto Sans TC', sans-serif;
-      letter-spacing: 0.3em;
-      animation: slideIn 0.8s ease forwards;
-      opacity: 0;
-      transform: translateX(-100%);
-    }
-
-    @keyframes slideIn {
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: white;
-      font-size: 0.9rem;
-      font-family: 'Noto Sans TC', sans-serif;
-      letter-spacing: 0.15em;
-      transition: color 0.3s ease;
-    }
-
-    .nav-links a:hover {
-      color: #ccc;
-    }
-
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-    }
-
-    .hamburger div {
-      width: 25px;
-      height: 2px;
-      background: white;
-      transition: all 0.3s ease;
-    }
-
-    .mobile-menu {
-      position: absolute;
-      top: 100%;
-      right: 0;
-      background: rgba(0, 0, 0, 0.85);
-      flex-direction: column;
-      width: 100%;
-      text-align: right;
-      padding: 1.5rem 2rem;
-      opacity: 0;
-      transform: translateY(-20px);
-      pointer-events: none;
-      display: flex;
-      flex-direction: column;
-      transition: all 0.4s ease;
-    }
-
-    .mobile-menu.show {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-
-    .mobile-menu a {
-      padding: 1rem 0;
-      text-decoration: none;
-      color: white;
-      font-family: 'Noto Sans TC', sans-serif;
+    p.subtitle {
       font-size: 1rem;
       letter-spacing: 0.15em;
-      transition: color 0.3s ease;
     }
+  }
 
-    .mobile-menu a:hover {
-      color: #ccc;
-    }
-
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-      }
-      .hamburger {
-        display: flex;
-      }
-    }
-
-    .background {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      z-index: -1;
-    }
-
-    #bgVideo {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      position: absolute;
-      top: 0;
-      left: 0;
-      transition: opacity 1.5s ease;
-    }
-
-    .fade-out {
-      opacity: 0;
-    }
-
-    #bgImage {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0;
-      transition: opacity 2s ease;
-    }
-
-    .content {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      color: white;
-      z-index: 1;
-      padding: 2rem;
-      padding-top: 120px; /* 預留導航列高度 */
-    }
-
-    .content h1 {
-      font-size: 3rem;
-      letter-spacing: 2px;
-      margin-bottom: 1rem;
-    }
-
-    .content p {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-size: 1rem;
-      max-width: 600px;
-      letter-spacing: 0.4em;
-    }
-
-    /* ============ 技能區塊樣式 ============ */
-    .skills-section {
-      width: 100%;
-      display: flex;
-      flex-direction: row;
-      margin-top: 3rem;
-    }
-
-    .skill {
-      position: relative;
-      flex: 1;
-      height: 17vh;
-      background-size: cover;
-      background-position: center;
-      display: flex;
-    }
-
-    .skill::after {
-      content: "";
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.45);
-      z-index: 1;
-    }
-
-    .overlay-text {
-      position: absolute;
-      bottom: 45px;
-      left: 30px;
-      color: white;
-      max-width: 80%;
-      text-align: left;
-      padding: 0;
-      z-index: 2;
-    }
-
-    .overlay-text h2 {
-      font-size: 1.3rem;
-      letter-spacing: 0.2em;
-      margin-bottom: 1rem;
-    }
-
-    .overlay-text p {
-      font-size: 0.7rem;
-      line-height: 1.8;
-      letter-spacing: 0.05em;
-      font-family: 'Noto Sans TC', sans-serif;
-    }
-
-    @media (max-width: 768px) {
-      .overlay-text h2 {
-        font-size: 1rem;
-      }
-      .overlay-text p {
-        font-size: 0.6rem;
-      }
-    }
-
-    /* ============ 直式作品集展示區 ============ */
-    .portrait-gallery {
-      max-width: 1200px;
-      margin: 3rem auto 6rem;
-      padding: 0 20px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 32px;
-      color: white;
-    }
-
-    .portrait-item a {
-      display: block;
-      text-decoration: none;
-      color: inherit;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.7);
-      background-color: #111;
-      transition: transform 0.3s ease;
-      position: relative;
-    }
-
-    .portrait-item a:hover {
-      transform: scale(1.03);
-      z-index: 2;
-    }
-
-    .portrait-thumb {
-      width: 100%;
-      aspect-ratio: 9 / 16; /* 直式比例 */
-      background-size: cover;
-      background-position: center;
-      filter: brightness(0.9);
-      transition: filter 0.3s ease;
-      position: relative;
-    }
-
-    .portrait-thumb:hover {
-      filter: brightness(0.7);
-    }
-
-    .info-overlay {
-      position: absolute;
-      bottom: 12px;
-      left: 12px;
-      right: 12px;
-      background: rgba(0,0,0,0.5);
-      padding: 12px;
-      border-radius: 4px;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      color: #fff;
-      font-family: 'Noto Sans TC', sans-serif;
-    }
-
-    .portrait-thumb:hover .info-overlay {
-      opacity: 1;
-    }
-
-    .info-overlay h3 {
-      margin: 0 0 4px;
-      font-weight: 600;
-      font-size: 1.1rem;
-    }
-
-    .info-overlay p {
-      margin: 0;
-      font-size: 0.9rem;
-      color: #ccc;
-    }
-
-    @media (max-width: 600px) {
-      .portrait-gallery {
-        gap: 20px;
-      }
-    }
-  </style>
+</style>
 </head>
 <body>
 
-  <!-- 導覽列 -->
-  <nav class="navbar">
-    <div class="logo">PORTFOLIO</div>
-    <div class="nav-links">
-      <a href="index.html">HOME</a>
-      <a href="work.html">WORK</a>
-      <a href="about.html">ABOUT</a>
-    </div>
-    <div class="hamburger" onclick="toggleMenu()">
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-    <div class="mobile-menu" id="mobileMenu">
-      <a href="index.html">HOME</a>
-      <a href="work.html">WORK</a>
-      <a href="about.html">ABOUT</a>
-    </div>
-  </nav>
-
-  <!-- 背景容器 -->
-  <div class="background">
-    <video id="bgVideo" autoplay muted playsinline>
-      <source src="images/images/home/personalvideo2.mp4" type="video/mp4">
-      您的瀏覽器不支援 video 元素。
-    </video>
-    <img id="bgImage" src="images/images/home/homebg1.png" alt="背景圖片" />
-  </div>
-
-  <!-- 主要內容 -->
-  <main class="content" role="main" aria-label="網站主要內容">
+  <main class="content" role="main" aria-label="主要內容">
     <h1>CHOU MARCUS</h1>
-    <p>剪輯師 / 後製 / 導演</p>
+    <p class="subtitle">剪輯師 / 後製 / 導演</p>
 
-    <section class="skills-section" aria-label="技能介紹">
-      <div class="skill" style="background-image: url('images/images/home/edit.jpg');">
-        <div class="overlay-text">
-          <h2>剪輯</h2>
-          <p>長度節奏把控，素材整合運鏡精準，輔助影像說故事。</p>
-        </div>
+    <section class="gallery" aria-label="作品集">
+      <div class="item" tabindex="0" role="button" aria-pressed="false" aria-label="播放作品名稱一影片" data-youtube-id="dQw4w9WgXcQ">
+        <div class="thumb" style="background-image: url('images/portrait1.jpg');" aria-hidden="true"></div>
+        <div class="title-overlay">作品名稱一</div>
       </div>
-      <div class="skill" style="background-image: url('images/images/home/postproduction.jpg');">
-        <div class="overlay-text">
-          <h2>後製</h2>
-          <p>色彩調整、動態圖形、合成疊加，營造多層次視覺效果。</p>
-        </div>
+      <div class="item" tabindex="0" role="button" aria-pressed="false" aria-label="播放作品名稱二影片" data-youtube-id="M7lc1UVf-VE">
+        <div class="thumb" style="background-image: url('images/portrait2.jpg');" aria-hidden="true"></div>
+        <div class="title-overlay">作品名稱二</div>
       </div>
-      <div class="skill" style="background-image: url('images/images/home/director.jpg');">
-        <div class="overlay-text">
-          <h2>導演</h2>
-          <p>鏡頭設計與溝通，精準捕捉情感與故事內核。</p>
-        </div>
+      <div class="item" tabindex="0" role="button" aria-pressed="false" aria-label="播放作品名稱三影片" data-youtube-id="9bZkp7q19f0">
+        <div class="thumb" style="background-image: url('images/portrait3.jpg');" aria-hidden="true"></div>
+        <div class="title-overlay">作品名稱三</div>
       </div>
     </section>
-
-    <!-- 新增直式作品集展示區 -->
-    <section class="portrait-gallery" aria-label="直式作品集展示">
-      <div class="portrait-item">
-        <a href="https://example.com/project1" target="_blank" rel="noopener noreferrer" aria-describedby="desc1">
-          <div class="portrait-thumb" style="background-image: url('images/portrait1.jpg');">
-            <div class="info-overlay">
-              <h3>作品名稱一</h3>
-              <p id="desc1">描述文字或作品類型簡介</p>
-            </div>
-          </div>
-        </a>
-      </div>
-      <div class="portrait-item">
-        <a href="https://example.com/project2" target="_blank" rel="noopener noreferrer" aria-describedby="desc2">
-          <div class="portrait-thumb" style="background-image: url('images/portrait2.jpg');">
-            <div class="info-overlay">
-              <h3>作品名稱二</h3>
-              <p id="desc2">描述文字或作品類型簡介</p>
-            </div>
-          </div>
-        </a>
-      </div>
-      <div class="portrait-item">
-        <a href="https://example.com/project3" target="_blank" rel="noopener noreferrer" aria-describedby="desc3">
-          <div class="portrait-thumb" style="background-image: url('images/portrait3.jpg');">
-            <div class="info-overlay">
-              <h3>作品名稱三</h3>
-              <p id="desc3">描述文字或作品類型簡介</p>
-            </div>
-          </div>
-        </a>
-      </div>
-      <!-- 更多作品項目可依需求增加 -->
-    </section>
-
   </main>
 
+  <!-- 燈箱影片播放器 -->
+  <div id="lightbox" role="dialog" aria-modal="true" aria-label="影片播放視窗">
+    <button class="close-btn" aria-label="關閉影片播放器">&times;</button>
+    <iframe src="" allow="autoplay; encrypted-media" allowfullscreen title="影片播放器"></iframe>
+  </div>
+
   <script>
-    function toggleMenu() {
-      const menu = document.getElementById('mobileMenu');
-      menu.classList.toggle('show');
+    const items = document.querySelectorAll('.gallery .item');
+    const lightbox = document.getElementById('lightbox');
+    const iframe = lightbox.querySelector('iframe');
+    const closeBtn = lightbox.querySelector('.close-btn');
+
+    let lastFocusedItem = null;
+
+    function openLightbox(youtubeId, triggeringItem) {
+      iframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0`;
+      lightbox.classList.add('active');
+
+      // Accessibility: focus on close button
+      closeBtn.focus();
+
+      triggeringItem.setAttribute('aria-pressed', 'true');
     }
 
-    const video = document.getElementById('bgVideo');
-    const bgImage = document.getElementById('bgImage');
+    function closeLightbox() {
+      iframe.src = '';
+      lightbox.classList.remove('active');
 
-    video.addEventListener('ended', () => {
-      video.classList.add('fade-out');
-      bgImage.style.opacity = '1';
+      if(lastFocusedItem){
+        lastFocusedItem.focus();
+        lastFocusedItem.setAttribute('aria-pressed', 'false');
+      }
+    }
+
+    items.forEach(item => {
+      item.addEventListener('click', () => {
+        lastFocusedItem = item;
+        const ytId = item.getAttribute('data-youtube-id');
+        if(ytId) openLightbox(ytId, item);
+      });
+      item.addEventListener('keydown', e => {
+        if(e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          lastFocusedItem = item;
+          const ytId = item.getAttribute('data-youtube-id');
+          if(ytId) openLightbox(ytId, item);
+        }
+      });
+    });
+
+    closeBtn.addEventListener('click', closeLightbox);
+
+    // 點擊背景遮罩也關閉
+    lightbox.addEventListener('click', e => {
+      if(e.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    // Esc 鍵關閉燈箱
+    document.addEventListener('keydown', e => {
+      if(e.key === 'Escape' && lightbox.classList.contains('active')) {
+        closeLightbox();
+      }
     });
   </script>
 </body>
