@@ -250,6 +250,33 @@ body::before {
       margin-top: 1rem;
     }
   }
+
+.category-tabs {
+  margin: 2rem 0 2.5rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.category-tabs .tab {
+  padding: 0.4rem 1.2rem;
+  background: rgba(255,255,255,0.15);
+  border: none;
+  color: white;
+  font-family: 'Noto Sans TC', sans-serif;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+  border-radius: 20px;
+  transition: background 0.3s ease;
+  font-size: 0.8rem;
+}
+
+.category-tabs .tab.active,
+.category-tabs .tab:hover {
+  background: rgba(255,255,255,0.4);
+}
+    
 </style>
 </head>
 <body>
@@ -278,20 +305,28 @@ body::before {
     <h1>影音shorts</h1>
     <p class="subtitle">企劃 / 拍攝 / 剪輯</p>
 
+    <div class="category-tabs">
+  <button class="tab active" data-category="all">全部</button>
+  <button class="tab" data-category="interview">訪談</button>
+  <button class="tab" data-category="corporate">形象</button>
+  <button class="tab" data-category="product">產品</button>
+  <button class="tab" data-category="podcast">Podcast</button>
+</div>
+
     <section class="gallery" aria-label="作品集">
-      <div class="item" tabindex="0" role="button" aria-pressed="false" aria-label="播放品牌形象影片" data-youtube-id="RMPPxtUgftE">
+      <div class="item" data-category="interview" tabindex="0" role="button" aria-pressed="false" aria-label="播放品牌形象影片" data-youtube-id="RMPPxtUgftE">
   <div class="thumb" style="background-image: url('images/video4.jpg');" aria-hidden="true"></div>
   <div class="title">品牌形象影片</div>
 </div>
-      <div class="item" tabindex="0" role="button" aria-pressed="false" aria-label="播放品牌形象影片" data-youtube-id="RMPPxtUgftE">
+      <div class="item" data-category="corporate" tabindex="0" role="button" aria-pressed="false" aria-label="播放品牌形象影片" data-youtube-id="RMPPxtUgftE">
   <div class="thumb" style="background-image: url('images/video4.jpg');" aria-hidden="true"></div>
   <div class="title">品牌形象影片</div>
 </div>
-      <div class="item" tabindex="0" role="button" aria-pressed="false" aria-label="播放品牌形象影片" data-youtube-id="RMPPxtUgftE">
+      <div class="item" data-category="product" tabindex="0" role="button" aria-pressed="false" aria-label="播放品牌形象影片" data-youtube-id="RMPPxtUgftE">
   <div class="thumb" style="background-image: url('images/video4.jpg');" aria-hidden="true"></div>
   <div class="title">品牌形象影片</div>
 </div>
-      <div class="item" tabindex="0" role="button" aria-pressed="false" aria-label="播放品牌形象影片" data-youtube-id="RMPPxtUgftE">
+      <div class="item" data-category="podcast" tabindex="0" role="button" aria-pressed="false" aria-label="播放品牌形象影片" data-youtube-id="RMPPxtUgftE">
   <div class="thumb" style="background-image: url('images/video4.jpg');" aria-hidden="true"></div>
   <div class="title">品牌形象影片</div>
 </div>
@@ -363,6 +398,31 @@ iframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0&modest
       const menu = document.getElementById('mobileMenu');
       menu.classList.toggle('show');
     }
+
+// 分類功能
+const tabs = document.querySelectorAll('.tab');
+const galleryItems = document.querySelectorAll('.gallery .item');
+
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    // 切換 active 樣式
+    tabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+
+    const category = tab.getAttribute('data-category');
+
+    galleryItems.forEach(item => {
+      const itemCategory = item.getAttribute('data-category');
+
+      if (category === 'all' || itemCategory === category) {
+        item.style.display = 'block';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  });
+});
+    
   </script>
 </body>
 </html>
