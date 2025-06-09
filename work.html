@@ -1,1 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>直式作品集展示</title>
+  <style>
+    /* Reset與基礎 */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: "Noto Sans TC", sans-serif;
+      background-color: #000;
+      color: #fff;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    h1 {
+      text-align: center;
+      padding: 60px 20px 40px;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    /* 作品集區塊 */
+    .portrait-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 32px;
+      padding: 0 40px 80px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .portrait-item a {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
+      transition: transform 0.3s ease;
+      background-color: #111;
+    }
+
+    .portrait-item a:hover {
+      transform: scale(1.03);
+    }
+
+    .portrait-thumb {
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      filter: brightness(0.9);
+      transition: filter 0.3s ease;
+    }
+
+    .portrait-thumb:hover {
+      filter: brightness(0.7);
+    }
+
+    .info-overlay {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      right: 12px;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 12px;
+      border-radius: 4px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .portrait-thumb:hover .info-overlay {
+      opacity: 1;
+    }
+
+    .info-overlay h3 {
+      margin: 0 0 4px;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .info-overlay p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #ccc;
+    }
+
+    /* 響應式小螢幕間距調整 */
+    @media (max-width: 600px) {
+      .portrait-gallery {
+        padding: 0 20px 60px;
+        gap: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>作品集展示</h1>
+
+  <section class="portrait-gallery">
+    <div class="portrait-item">
+      <a href="/projects/project1">
+        <div class="portrait-thumb" style="background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80');">
+          <div class="info-overlay">
+            <h3>作品名稱一</h3>
+            <p>導演 A / 2024</p>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="portrait-item">
+      <a href="/projects/project2">
+        <div class="portrait-thumb" style="background-image: url('https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=600&q=80');">
+          <div class="info-overlay">
+            <h3>作品名稱二</h3>
+            <p>導演 B / 2023</p>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="portrait-item">
+      <a href="/projects/project3">
+        <div class="portrait-thumb" style="background-image: url('https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=600&q=80');">
+          <div class="info-overlay">
+            <h3>作品名稱三</h3>
+            <p>導演 C / 2025</p>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="portrait-item">
+      <a href="/projects/project4">
+        <div class="portrait-thumb" style="background-image: url('https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=600&q=80');">
+          <div class="info-overlay">
+            <h3>作品名稱四</h3>
+            <p>導演 D / 2024</p>
+          </div>
+        </div>
+      </a>
+    </div>
+
+  </section>
+
+</body>
+</html>
 
