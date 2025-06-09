@@ -2,37 +2,266 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>直式作品集展示</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CHOU MARCUS</title>
+
+  <!-- 引入思源黑體 Noto Sans TC -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+
   <style>
-    /* Reset與基礎 */
     * {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
     }
-    body {
-      margin: 0;
-      font-family: "Noto Sans TC", sans-serif;
+
+    html, body {
+      height: 100%;
+      font-family: 'Helvetica Neue', sans-serif;
       background-color: #000;
       color: #fff;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
     }
 
-    h1 {
+    /* 導覽列 */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 2rem;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 1.2rem;
+      line-height: 40px;
+      height: 40px;
+      color: white;
+      font-weight: bold;
+      font-family: 'Noto Sans TC', sans-serif;
+      letter-spacing: 0.3em;
+      animation: slideIn 0.8s ease forwards;
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+
+    @keyframes slideIn {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: white;
+      font-size: 0.9rem;
+      font-family: 'Noto Sans TC', sans-serif;
+      letter-spacing: 0.15em;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #ccc;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .hamburger div {
+      width: 25px;
+      height: 2px;
+      background: white;
+      transition: all 0.3s ease;
+    }
+
+    .mobile-menu {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: rgba(0, 0, 0, 0.85);
+      flex-direction: column;
+      width: 100%;
+      text-align: right;
+      padding: 1.5rem 2rem;
+      opacity: 0;
+      transform: translateY(-20px);
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.4s ease;
+    }
+
+    .mobile-menu.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .mobile-menu a {
+      padding: 1rem 0;
+      text-decoration: none;
+      color: white;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+      transition: color 0.3s ease;
+    }
+
+    .mobile-menu a:hover {
+      color: #ccc;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    .background {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    #bgVideo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: opacity 1.5s ease;
+    }
+
+    .fade-out {
+      opacity: 0;
+    }
+
+    #bgImage {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 2s ease;
+    }
+
+    .content {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
-      padding: 60px 20px 40px;
-      font-weight: 700;
-      letter-spacing: 2px;
+      color: white;
+      z-index: 1;
+      padding: 2rem;
+      padding-top: 120px; /* 預留導航列高度 */
     }
 
-    /* 作品集區塊 */
+    .content h1 {
+      font-size: 3rem;
+      letter-spacing: 2px;
+      margin-bottom: 1rem;
+    }
+
+    .content p {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 1rem;
+      max-width: 600px;
+      letter-spacing: 0.4em;
+    }
+
+    /* ============ 技能區塊樣式 ============ */
+    .skills-section {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      margin-top: 3rem;
+    }
+
+    .skill {
+      position: relative;
+      flex: 1;
+      height: 17vh;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+    }
+
+    .skill::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.45);
+      z-index: 1;
+    }
+
+    .overlay-text {
+      position: absolute;
+      bottom: 45px;
+      left: 30px;
+      color: white;
+      max-width: 80%;
+      text-align: left;
+      padding: 0;
+      z-index: 2;
+    }
+
+    .overlay-text h2 {
+      font-size: 1.3rem;
+      letter-spacing: 0.2em;
+      margin-bottom: 1rem;
+    }
+
+    .overlay-text p {
+      font-size: 0.7rem;
+      line-height: 1.8;
+      letter-spacing: 0.05em;
+      font-family: 'Noto Sans TC', sans-serif;
+    }
+
+    @media (max-width: 768px) {
+      .overlay-text h2 {
+        font-size: 1rem;
+      }
+      .overlay-text p {
+        font-size: 0.6rem;
+      }
+    }
+
+    /* ============ 直式作品集展示區 ============ */
     .portrait-gallery {
+      max-width: 1200px;
+      margin: 3rem auto 6rem;
+      padding: 0 20px;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 32px;
-      padding: 0 40px 80px;
-      max-width: 1200px;
-      margin: 0 auto;
+      color: white;
     }
 
     .portrait-item a {
@@ -41,23 +270,25 @@
       color: inherit;
       border-radius: 8px;
       overflow: hidden;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
-      transition: transform 0.3s ease;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.7);
       background-color: #111;
+      transition: transform 0.3s ease;
+      position: relative;
     }
 
     .portrait-item a:hover {
       transform: scale(1.03);
+      z-index: 2;
     }
 
     .portrait-thumb {
       width: 100%;
-      aspect-ratio: 9 / 16;
+      aspect-ratio: 9 / 16; /* 直式比例 */
       background-size: cover;
       background-position: center;
-      position: relative;
       filter: brightness(0.9);
       transition: filter 0.3s ease;
+      position: relative;
     }
 
     .portrait-thumb:hover {
@@ -69,11 +300,13 @@
       bottom: 12px;
       left: 12px;
       right: 12px;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0,0,0,0.5);
       padding: 12px;
       border-radius: 4px;
       opacity: 0;
       transition: opacity 0.3s ease;
+      color: #fff;
+      font-family: 'Noto Sans TC', sans-serif;
     }
 
     .portrait-thumb:hover .info-overlay {
@@ -92,10 +325,8 @@
       color: #ccc;
     }
 
-    /* 響應式小螢幕間距調整 */
     @media (max-width: 600px) {
       .portrait-gallery {
-        padding: 0 20px 60px;
         gap: 20px;
       }
     }
@@ -103,55 +334,28 @@
 </head>
 <body>
 
-  <h1>作品集展示</h1>
-
-  <section class="portrait-gallery">
-    <div class="portrait-item">
-      <a href="/projects/project1">
-        <div class="portrait-thumb" style="background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80');">
-          <div class="info-overlay">
-            <h3>作品名稱一</h3>
-            <p>導演 A / 2024</p>
-          </div>
-        </div>
-      </a>
+  <!-- 導覽列 -->
+  <nav class="navbar">
+    <div class="logo">PORTFOLIO</div>
+    <div class="nav-links">
+      <a href="index.html">HOME</a>
+      <a href="work.html">WORK</a>
+      <a href="about.html">ABOUT</a>
     </div>
-
-    <div class="portrait-item">
-      <a href="/projects/project2">
-        <div class="portrait-thumb" style="background-image: url('https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=600&q=80');">
-          <div class="info-overlay">
-            <h3>作品名稱二</h3>
-            <p>導演 B / 2023</p>
-          </div>
-        </div>
-      </a>
+    <div class="hamburger" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
     </div>
-
-    <div class="portrait-item">
-      <a href="/projects/project3">
-        <div class="portrait-thumb" style="background-image: url('https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=600&q=80');">
-          <div class="info-overlay">
-            <h3>作品名稱三</h3>
-            <p>導演 C / 2025</p>
-          </div>
-        </div>
-      </a>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html">HOME</a>
+      <a href="work.html">WORK</a>
+      <a href="about.html">ABOUT</a>
     </div>
+  </nav>
 
-    <div class="portrait-item">
-      <a href="/projects/project4">
-        <div class="portrait-thumb" style="background-image: url('https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=600&q=80');">
-          <div class="info-overlay">
-            <h3>作品名稱四</h3>
-            <p>導演 D / 2024</p>
-          </div>
-        </div>
-      </a>
-    </div>
-
-  </section>
-
-</body>
-</html>
-
+  <!-- 背景容器 -->
+  <div class="background">
+    <video id="bgVideo" autoplay muted playsinline>
+      <source src="images/images/home/personalvideo2.mp4" type="video/mp4">
+      您的瀏覽器
