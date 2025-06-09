@@ -13,6 +13,44 @@
     color: #fff;
   }
 
+  /* 固定導覽列 */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 60px;
+    background: rgba(0,0,0,0.85);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.7);
+    z-index: 3000;
+  }
+  nav .logo {
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 0.15em;
+    user-select: none;
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.8rem;
+    margin: 0; padding: 0;
+  }
+  nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    transition: color 0.3s ease;
+  }
+  nav ul li a:hover,
+  nav ul li a:focus {
+    color: #ffcc00;
+    outline: none;
+  }
+
   .content {
     max-width: 1200px;
     margin: 100px auto 60px;
@@ -84,6 +122,7 @@
     display: flex;
   }
 
+  #lightbox video,
   #lightbox iframe {
     max-width: 90vw;
     max-height: 80vh;
@@ -119,53 +158,96 @@
 </head>
 <body>
 
+  <nav role="navigation" aria-label="主選單">
+    <div class="logo">CHOU MARCUS</div>
+    <ul>
+      <li><a href="#about">關於我</a></li>
+      <li><a href="#portfolio">作品集</a></li>
+      <li><a href="#contact">聯絡我</a></li>
+    </ul>
+  </nav>
+
   <main class="content" role="main" aria-label="主要內容">
-    <h1>CHOU MARCUS</h1>
+    <h1 id="about">CHOU MARCUS</h1>
     <p class="subtitle">剪輯師 / 後製 / 導演</p>
 
-    <section class="gallery" aria-label="作品集">
-      <div class="item" tabindex="0" role="button" aria-pressed="false" aria-label="播放作品名稱一影片" data-youtube-id="dQw4w9WgXcQ">
+    <section class="gallery" id="portfolio" aria-label="作品集">
+      <div class="item" tabindex="0" role="button" aria-pressed="false" aria-label="播放作品名稱一影片" data-video-type="local" data-video-src="videos/video1.mp4">
         <div class="thumb" style="background-image: url('images/portrait1.jpg');" aria-hidden="true"></div>
         <div class="title-overlay">作品名稱一</div>
       </div>
-      <div class="item" tabindex="0" role="button" aria-pressed="false" aria-label="播放作品名稱二影片" data-youtube-id="M7lc1UVf-VE">
+      <div class="item" tabindex="0" role="button" aria-pressed="false" aria-label="播放作品名稱二影片" data-video-type="youtube" data-video-src="https://www.youtube.com/embed/你的YouTube影片ID?autoplay=1&rel=0">
         <div class="thumb" style="background-image: url('images/portrait2.jpg');" aria-hidden="true"></div>
-        <div class="title-overlay">作品名稱二</div>
+        <div class="title-overlay">作品名稱二 (YouTube)</div>
       </div>
-      <div class="item" tabindex="0" role="button" aria-pressed="false" aria-label="播放作品名稱三影片" data-youtube-id="9bZkp7q19f0">
+      <div class="item" tabindex="0" role="button" aria-pressed="false" aria-label="播放作品名稱三影片" data-video-type="local" data-video-src="videos/video3.mp4">
         <div class="thumb" style="background-image: url('images/portrait3.jpg');" aria-hidden="true"></div>
         <div class="title-overlay">作品名稱三</div>
       </div>
+    </section>
+
+    <section id="contact" style="margin-top: 4rem;">
+      <h2>聯絡我</h2>
+      <p>email@example.com</p>
     </section>
   </main>
 
   <!-- 燈箱影片播放器 -->
   <div id="lightbox" role="dialog" aria-modal="true" aria-label="影片播放視窗">
     <button class="close-btn" aria-label="關閉影片播放器">&times;</button>
-    <iframe src="" allow="autoplay; encrypted-media" allowfullscreen title="影片播放器"></iframe>
+    <!-- 影片區域會動態插入 video 或 iframe -->
   </div>
 
   <script>
     const items = document.querySelectorAll('.gallery .item');
     const lightbox = document.getElementById('lightbox');
-    const iframe = lightbox.querySelector('iframe');
     const closeBtn = lightbox.querySelector('.close-btn');
 
     let lastFocusedItem = null;
 
-    function openLightbox(youtubeId, triggeringItem) {
-      iframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0`;
+    function openLightbox(type, src, triggeringItem) {
+      lightbox.innerHTML = '<button class="close-btn" aria-label="關閉影片播放器">&times;</button>';
+
+      if(type === 'local') {
+        const video = document.createElement('video');
+        video.controls = true;
+        video.src = src;
+        video.style.maxWidth = '90vw';
+        video.style.maxHeight = '80vh';
+        video.style.borderRadius = '12px';
+        video.style.boxShadow = '0 0 20px #000';
+        video.autoplay = true;
+        lightbox.appendChild(video);
+      } else if(type === 'youtube') {
+        const iframe = document.createElement('iframe');
+        iframe.src = src;
+        iframe.width = "100%";
+        iframe.height = "100%";
+        iframe.style.maxWidth = '90vw';
+        iframe.style.maxHeight = '80vh';
+        iframe.style.borderRadius = '12px';
+        iframe.style.boxShadow = '0 0 20px #000';
+        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+        iframe.allowFullscreen = true;
+        iframe.frameBorder = "0";
+        lightbox.appendChild(iframe);
+      }
+
       lightbox.classList.add('active');
 
-      // Accessibility: focus on close button
-      closeBtn.focus();
+      // 重新綁定關閉按鈕事件
+      lightbox.querySelector('.close-btn').addEventListener('click', closeLightbox);
 
+      // Accessibility: focus on close button
+      lightbox.querySelector('.close-btn').focus();
+
+      // 標記觸發按鈕狀態
       triggeringItem.setAttribute('aria-pressed', 'true');
     }
 
     function closeLightbox() {
-      iframe.src = '';
       lightbox.classList.remove('active');
+      lightbox.innerHTML = ''; // 清空內容，斷開影片來源
 
       if(lastFocusedItem){
         lastFocusedItem.focus();
@@ -176,34 +258,35 @@
     items.forEach(item => {
       item.addEventListener('click', () => {
         lastFocusedItem = item;
-        const ytId = item.getAttribute('data-youtube-id');
-        if(ytId) openLightbox(ytId, item);
+        const type = item.getAttribute('data-video-type');
+        const src = item.getAttribute('data-video-src');
+        openLightbox(type, src, item);
       });
       item.addEventListener('keydown', e => {
         if(e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           lastFocusedItem = item;
-          const ytId = item.getAttribute('data-youtube-id');
-          if(ytId) openLightbox(ytId, item);
+          const type = item.getAttribute('data-video-type');
+          const src = item.getAttribute('data-video-src');
+          openLightbox(type, src, item);
         }
       });
     });
 
-    closeBtn.addEventListener('click', closeLightbox);
-
-    // 點擊背景遮罩也關閉
-    lightbox.addEventListener('click', e => {
+    // 點擊背景遮罩也可關閉
+    lightbox.addEventListener('click', (e) => {
       if(e.target === lightbox) {
         closeLightbox();
       }
     });
 
-    // Esc 鍵關閉燈箱
-    document.addEventListener('keydown', e => {
+    // Esc 鍵關閉
+    document.addEventListener('keydown', (e) => {
       if(e.key === 'Escape' && lightbox.classList.contains('active')) {
         closeLightbox();
       }
     });
   </script>
+
 </body>
 </html>
