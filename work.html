@@ -358,4 +358,87 @@
   <div class="background">
     <video id="bgVideo" autoplay muted playsinline>
       <source src="images/images/home/personalvideo2.mp4" type="video/mp4">
-      您的瀏覽器
+      您的瀏覽器不支援 video 元素。
+    </video>
+    <img id="bgImage" src="images/images/home/homebg1.png" alt="背景圖片" />
+  </div>
+
+  <!-- 主要內容 -->
+  <main class="content" role="main" aria-label="網站主要內容">
+    <h1>CHOU MARCUS</h1>
+    <p>剪輯師 / 後製 / 導演</p>
+
+    <section class="skills-section" aria-label="技能介紹">
+      <div class="skill" style="background-image: url('images/images/home/edit.jpg');">
+        <div class="overlay-text">
+          <h2>剪輯</h2>
+          <p>長度節奏把控，素材整合運鏡精準，輔助影像說故事。</p>
+        </div>
+      </div>
+      <div class="skill" style="background-image: url('images/images/home/postproduction.jpg');">
+        <div class="overlay-text">
+          <h2>後製</h2>
+          <p>色彩調整、動態圖形、合成疊加，營造多層次視覺效果。</p>
+        </div>
+      </div>
+      <div class="skill" style="background-image: url('images/images/home/director.jpg');">
+        <div class="overlay-text">
+          <h2>導演</h2>
+          <p>鏡頭設計與溝通，精準捕捉情感與故事內核。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 新增直式作品集展示區 -->
+    <section class="portrait-gallery" aria-label="直式作品集展示">
+      <div class="portrait-item">
+        <a href="https://example.com/project1" target="_blank" rel="noopener noreferrer" aria-describedby="desc1">
+          <div class="portrait-thumb" style="background-image: url('images/portrait1.jpg');">
+            <div class="info-overlay">
+              <h3>作品名稱一</h3>
+              <p id="desc1">描述文字或作品類型簡介</p>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="portrait-item">
+        <a href="https://example.com/project2" target="_blank" rel="noopener noreferrer" aria-describedby="desc2">
+          <div class="portrait-thumb" style="background-image: url('images/portrait2.jpg');">
+            <div class="info-overlay">
+              <h3>作品名稱二</h3>
+              <p id="desc2">描述文字或作品類型簡介</p>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="portrait-item">
+        <a href="https://example.com/project3" target="_blank" rel="noopener noreferrer" aria-describedby="desc3">
+          <div class="portrait-thumb" style="background-image: url('images/portrait3.jpg');">
+            <div class="info-overlay">
+              <h3>作品名稱三</h3>
+              <p id="desc3">描述文字或作品類型簡介</p>
+            </div>
+          </div>
+        </a>
+      </div>
+      <!-- 更多作品項目可依需求增加 -->
+    </section>
+
+  </main>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('show');
+    }
+
+    const video = document.getElementById('bgVideo');
+    const bgImage = document.getElementById('bgImage');
+
+    video.addEventListener('ended', () => {
+      video.classList.add('fade-out');
+      bgImage.style.opacity = '1';
+    });
+  </script>
+</body>
+</html>
