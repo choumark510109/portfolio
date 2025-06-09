@@ -45,3 +45,121 @@ body::before {
       padding: 1.5rem 2rem;
       z-index: 1000;
     }
+
+    .logo {
+      font-size: 1.2rem;
+      line-height: 40px;
+      height: 40px;
+      color: white;
+      font-weight: bold;
+      font-family: 'Noto Sans TC', sans-serif;
+      letter-spacing: 0.3em;
+      animation: slideIn 0.8s ease forwards;
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+
+    @keyframes slideIn {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: white;
+      font-size: 0.9rem;
+      font-family: 'Noto Sans TC', sans-serif;
+      letter-spacing: 0.15em;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #ccc;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .hamburger div {
+      width: 25px;
+      height: 2px;
+      background: white;
+      transition: all 0.3s ease;
+    }
+
+    .mobile-menu {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: rgba(0, 0, 0, 0.85);
+      flex-direction: column;
+      width: 100%;
+      text-align: right;
+      padding: 1.5rem 2rem;
+      opacity: 0;
+      transform: translateY(-20px);
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.4s ease;
+    }
+
+    .mobile-menu.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .mobile-menu a {
+      padding: 1rem 0;
+      text-decoration: none;
+      color: white;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+      transition: color 0.3s ease;
+    }
+
+    .mobile-menu a:hover {
+      color: #ccc;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      .hamburger {
+        display: flex;
+      }
+    }
+
+  .content {
+    max-width: 1200px;
+    margin: 120px auto 60px;
+    padding: 0 1rem;
+    text-align: center;
+    color: white;
+  }
+
+  h1 {
+    font-size: 1.2rem;
+    letter-spacing: 0.2em;
+  }
+
+  p.subtitle {
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+  }
