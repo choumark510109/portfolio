@@ -306,7 +306,7 @@ body::before {
     let lastFocusedItem = null;
 
     function openLightbox(youtubeId, triggeringItem) {
-      iframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0`;
+iframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0&modestbranding=1`;
       lightbox.classList.add('active');
       closeBtn.focus();
       triggeringItem.setAttribute('aria-pressed', 'true');
