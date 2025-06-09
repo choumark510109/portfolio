@@ -1,123 +1,181 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>CHOU MARCUS Portfolio</title>
-<style>
-  body, html {
-    margin: 0; padding: 0;
-    height: 100%;
-    font-family: 'Noto Sans TC', sans-serif;
-    background-color: #000;
-    color: #fff;
-  }
-
-  .content {
-    max-width: 1200px;
-    margin: 100px auto 60px;
-    padding: 0 1rem;
-    text-align: center;
-  }
-
-  h1 {
-    font-size: 3rem;
-    letter-spacing: 0.2em;
-  }
-
-  p.subtitle {
-    font-size: 1.1rem;
-    letter-spacing: 0.3em;
-    margin-bottom: 2rem;
-  }
-
-  .gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
-    gap: 1.5rem;
-  }
-
-  .item {
-    position: relative;
-    cursor: pointer;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.7);
-    transition: transform 0.3s ease;
-  }
-  .item:hover {
-    transform: scale(1.03);
-  }
-
-  .thumb {
-    width: 100%;
-    aspect-ratio: 9 / 16;
-    background-size: cover;
-    background-position: center;
-  }
-
-  .title-overlay {
-    position: absolute;
-    bottom: 10px; left: 10px;
-    right: 10px;
-    background: rgba(0,0,0,0.5);
-    padding: 8px 10px;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    font-size: 1rem;
-    user-select: none;
-  }
-
-  /* 燈箱樣式 */
-  #lightbox {
-    position: fixed;
-    top:0; left:0; right:0; bottom:0;
-    background: rgba(0,0,0,0.85);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
-    padding: 1rem;
-  }
-
-  #lightbox.active {
-    display: flex;
-  }
-
-  #lightbox iframe {
-    max-width: 90vw;
-    max-height: 80vh;
-    border-radius: 12px;
-    box-shadow: 0 0 20px #000;
-    background: black;
-  }
-
-  #lightbox .close-btn {
-    position: fixed;
-    top: 20px; right: 20px;
-    background: rgba(255,255,255,0.8);
-    color: black;
-    border: none;
-    font-size: 1.4rem;
-    padding: 0.25rem 0.75rem;
-    cursor: pointer;
-    border-radius: 6px;
-    user-select: none;
-  }
-
-  @media(max-width:600px) {
-    h1 {
-      font-size: 2.2rem;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CHOU MARCUS Portfolio</title>
+  <style>
+    body, html {
+      margin: 0; padding: 0;
+      height: 100%;
+      font-family: 'Noto Sans TC', sans-serif;
+      background-color: #000;
+      color: #fff;
     }
-    p.subtitle {
-      font-size: 1rem;
+
+    /* 導覽列樣式 */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      height: 60px;
+      background-color: rgba(0,0,0,0.8);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
+      z-index: 1000;
+    }
+
+    .nav-logo a {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: white;
+      text-decoration: none;
       letter-spacing: 0.15em;
     }
-  }
 
-</style>
+    .nav-links a {
+      margin-left: 1.5rem;
+      color: white;
+      text-decoration: none;
+      font-size: 0.95rem;
+      letter-spacing: 0.1em;
+      position: relative;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #ffcc00;
+    }
+
+    .nav-links a.active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 100%;
+      height: 2px;
+      background-color: #ffcc00;
+    }
+
+    .content {
+      max-width: 1200px;
+      margin: 120px auto 60px; /* 調高以避開導覽列 */
+      padding: 0 1rem;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3rem;
+      letter-spacing: 0.2em;
+    }
+
+    p.subtitle {
+      font-size: 1.1rem;
+      letter-spacing: 0.3em;
+      margin-bottom: 2rem;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .item {
+      position: relative;
+      cursor: pointer;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.7);
+      transition: transform 0.3s ease;
+    }
+    .item:hover {
+      transform: scale(1.03);
+    }
+
+    .thumb {
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .title-overlay {
+      position: absolute;
+      bottom: 10px; left: 10px;
+      right: 10px;
+      background: rgba(0,0,0,0.5);
+      padding: 8px 10px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      font-size: 1rem;
+      user-select: none;
+    }
+
+    #lightbox {
+      position: fixed;
+      top:0; left:0; right:0; bottom:0;
+      background: rgba(0,0,0,0.85);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      padding: 1rem;
+    }
+
+    #lightbox.active {
+      display: flex;
+    }
+
+    #lightbox iframe {
+      max-width: 90vw;
+      max-height: 80vh;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #000;
+      background: black;
+    }
+
+    #lightbox .close-btn {
+      position: fixed;
+      top: 20px; right: 20px;
+      background: rgba(255,255,255,0.8);
+      color: black;
+      border: none;
+      font-size: 1.4rem;
+      padding: 0.25rem 0.75rem;
+      cursor: pointer;
+      border-radius: 6px;
+      user-select: none;
+    }
+
+    @media(max-width:600px) {
+      h1 {
+        font-size: 2.2rem;
+      }
+      p.subtitle {
+        font-size: 1rem;
+        letter-spacing: 0.15em;
+      }
+    }
+  </style>
 </head>
 <body>
+
+  <!-- 導覽列 -->
+  <header class="navbar">
+    <div class="nav-logo">
+      <a href="index.html">CHOU MARCUS</a>
+    </div>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="work.html" class="active">Work</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
 
   <main class="content" role="main" aria-label="主要內容">
     <h1>CHOU MARCUS</h1>
@@ -156,18 +214,14 @@
     function openLightbox(youtubeId, triggeringItem) {
       iframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0`;
       lightbox.classList.add('active');
-
-      // Accessibility: focus on close button
       closeBtn.focus();
-
       triggeringItem.setAttribute('aria-pressed', 'true');
     }
 
     function closeLightbox() {
       iframe.src = '';
       lightbox.classList.remove('active');
-
-      if(lastFocusedItem){
+      if (lastFocusedItem) {
         lastFocusedItem.focus();
         lastFocusedItem.setAttribute('aria-pressed', 'false');
       }
@@ -177,33 +231,32 @@
       item.addEventListener('click', () => {
         lastFocusedItem = item;
         const ytId = item.getAttribute('data-youtube-id');
-        if(ytId) openLightbox(ytId, item);
+        if (ytId) openLightbox(ytId, item);
       });
       item.addEventListener('keydown', e => {
-        if(e.key === 'Enter' || e.key === ' ') {
+        if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           lastFocusedItem = item;
           const ytId = item.getAttribute('data-youtube-id');
-          if(ytId) openLightbox(ytId, item);
+          if (ytId) openLightbox(ytId, item);
         }
       });
     });
 
     closeBtn.addEventListener('click', closeLightbox);
 
-    // 點擊背景遮罩也關閉
     lightbox.addEventListener('click', e => {
-      if(e.target === lightbox) {
+      if (e.target === lightbox) {
         closeLightbox();
       }
     });
 
-    // Esc 鍵關閉燈箱
     document.addEventListener('keydown', e => {
-      if(e.key === 'Escape' && lightbox.classList.contains('active')) {
+      if (e.key === 'Escape' && lightbox.classList.contains('active')) {
         closeLightbox();
       }
     });
   </script>
 </body>
 </html>
+
