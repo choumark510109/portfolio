@@ -6,6 +6,9 @@
   <title>CHOU MARCUS Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
 
+  <!-- AOS 動畫套件 -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
   <style>
     * {
       margin: 0;
@@ -32,7 +35,6 @@
       z-index: -1;
     }
 
-    /* 導覽列 */
     .navbar {
       position: fixed;
       top: 0;
@@ -52,21 +54,27 @@
       color: white;
       font-weight: bold;
       letter-spacing: 0.3em;
-      animation: slideIn 0.8s ease forwards;
+      animation: fadeInLeft 1s ease forwards;
       opacity: 0;
-      transform: translateX(-100%);
     }
 
-    @keyframes slideIn {
-      to {
-        opacity: 1;
+    @keyframes fadeInLeft {
+      0% {
+        transform: translateX(-30%);
+        opacity: 0;
+      }
+      100% {
         transform: translateX(0);
+        opacity: 1;
       }
     }
 
     .nav-links {
       display: flex;
       gap: 2.5rem;
+      opacity: 0;
+      animation: fadeIn 1.2s ease forwards;
+      animation-delay: 0.6s;
     }
 
     .nav-links a {
@@ -139,7 +147,6 @@
       }
     }
 
-    /* About 內容區 */
     .about-info {
       display: flex;
       flex-wrap: wrap;
@@ -174,6 +181,7 @@
       letter-spacing: 0.05em;
       margin-bottom: 1rem;
       line-height: 1.8;
+      opacity: 0.95;
     }
 
     .email {
@@ -205,6 +213,11 @@
       margin-bottom: 0.8rem;
     }
 
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
     @media (max-width: 768px) {
       .about-info {
         flex-direction: column;
@@ -217,7 +230,6 @@
 </head>
 <body>
 
-  <!-- 導覽列 -->
   <nav class="navbar">
     <div class="logo">PORTFOLIO</div>
     <div class="nav-links">
@@ -237,9 +249,8 @@
     </div>
   </nav>
 
-  <!-- 主要內容區 -->
   <div class="about-info">
-    <div class="section-left">
+    <div class="section-left" data-aos="fade-up" data-aos-delay="100">
       <h2>Brand Marketing</h2>
       <h1>周俞成<br>MARCUS</h1>
       <p>參與過劇情短片、紀錄片等拍攝，了解攝影器材和燈光設計，<br>
@@ -249,7 +260,7 @@
       <p class="email">marks10820007@gmail.com</p>
     </div>
 
-    <div class="section-right">
+    <div class="section-right" data-aos="fade-up" data-aos-delay="300">
       <h3>experience</h3>
       <ul class="list">
         <li>台灣瑪摩 - 品牌行銷專員</li>
@@ -266,12 +277,19 @@
     </div>
   </div>
 
+  <!-- AOS 動畫初始化 -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script>
+    AOS.init({
+      once: true,
+      duration: 1000,
+      easing: 'ease-out',
+    });
+
     function toggleMenu() {
       const menu = document.getElementById('mobileMenu');
       menu.classList.toggle('show');
     }
   </script>
-
 </body>
 </html>
