@@ -170,28 +170,32 @@ body::before {
   gap: 1.5rem;
 }
 
-  .item {
-    position: relative;
-    cursor: pointer;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.7);
-    transition: transform 0.3s ease;
-  }
+.item {
+  position: relative;
+  cursor: pointer;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.7);
+  transition: transform 0.3s ease;
+  height: 360px;  /* 固定高度 */
+  display: flex;
+  flex-direction: column;
+}
 
-  .item:hover {
-    transform: scale(1.03);
-  }
+.item:hover {
+  transform: scale(1.03);
+}
 
 .thumb {
   width: 100%;
   height: 300px;
   background-size: cover;
   background-position: center;
-    margin-bottom: 0.3rem;
-  }
+  margin-bottom: 0.3rem;
+  flex-shrink: 0;
+}
 
-    .title {
+.title {
   padding: 0.5rem 0.75rem;
   font-size: 0.7rem;
   font-weight: 700;
@@ -199,7 +203,13 @@ body::before {
   color: white;
   background: none;
   text-align: center;
+  height: 40px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 
   #lightbox {
     position: fixed;
