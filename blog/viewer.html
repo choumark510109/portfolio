@@ -1,16 +1,30 @@
-<script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
-<script>
-  const urlParams = new URLSearchParams(window.location.search);
-  const file = urlParams.get("file") || "first-post.md";
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>文章內頁</title>
+  <script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <main class="blog-post">
+    <div id="content">載入中...</div>
+  </main>
 
-  fetch(`posts/${file}`)
-    .then(response => response.text())
-    .then(text => {
-      const md = window.markdownit();
-      document.getElementById("content").innerHTML = md.render(text);
-    })
-    .catch(err => {
-      document.getElementById("content").innerHTML = "文章載入失敗。";
-    });
-</script>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const file = urlParams.get("file") || "first-post.md";
+
+    fetch(`posts/${file}`)
+      .then(response => response.text())
+      .then(text => {
+        const md = window.markdownit();
+        document.getElementById("content").innerHTML = md.render(text);
+      })
+      .catch(err => {
+        document.getElementById("content").innerHTML = "文章載入失敗。";
+      });
+  </script>
+</body>
+</html>
 
