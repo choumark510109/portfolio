@@ -1,1 +1,16 @@
+<script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const file = urlParams.get("file") || "first-post.md";
+
+  fetch(`posts/${file}`)
+    .then(response => response.text())
+    .then(text => {
+      const md = window.markdownit();
+      document.getElementById("content").innerHTML = md.render(text);
+    })
+    .catch(err => {
+      document.getElementById("content").innerHTML = "文章載入失敗。";
+    });
+</script>
 
