@@ -13,7 +13,7 @@
 
   <script>
     const urlParams = new URLSearchParams(window.location.search);
-    const file = urlParams.get("file") || "first-post.md";
+    const file = urlParams.get("file") || "first-post.txt";
 
     fetch(`posts/${file}`)
       .then(response => response.text())
