@@ -143,18 +143,21 @@
       flex-direction: column;
       align-items: flex-start;
       gap: 2.5rem;
+      text-align: left;
     }
 
     .about-block {
       background: rgba(255,255,255,0.08);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      /* 取消毛玻璃效果 */
+      /* backdrop-filter: blur(10px); */
+      /* -webkit-backdrop-filter: blur(10px); */
       border-radius: 20px;
       border: 1px solid rgba(255,255,255,0.13);
       box-shadow: 0 8px 24px rgba(0,0,0,0.18);
       padding: 2.5rem 2rem;
       margin-bottom: 2.5rem;
       width: 100%;
+      text-align: left;
     }
 
     .about-block h1, .about-block h2, .about-block h3 {
@@ -162,20 +165,22 @@
       letter-spacing: 0.2em;
       margin-bottom: 1rem;
       color: #fff;
+      text-align: left;
     }
-    .about-block h1 { font-size: 2.2rem; }
-    .about-block h2 { font-size: 1.2rem; opacity: 0.8; }
-    .about-block h3 { font-size: 1rem; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 0.5rem; }
+    .about-block h1 { font-size: 1rem; } /* 2.2rem / 8 = 0.275rem */
+    .about-block h2 { font-size: 0.5rem; opacity: 0.8; } /* 1.2rem / 8 = 0.15rem */
+    .about-block h3 { font-size: 0.5rem; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 0.5rem; }
 
     .about-block p, .about-block ul {
-      font-size: 1rem;
+      font-size: 1rem; /* 1rem / 8 = 0.125rem */
       letter-spacing: 0.05em;
       line-height: 2;
       color: #fff;
       opacity: 0.93;
+      text-align: left;
     }
     .about-block ul { margin-top: 1.2rem; margin-bottom: 1.2rem; }
-    .about-block ul li { margin-bottom: 0.7rem; }
+    .about-block ul li { margin-bottom: 0.7rem; text-align: left; }
 
     .email {
       font-family: 'Playfair Display', serif;
