@@ -5,25 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>CHOU MARCUS Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
-<!-- Playfair Display -->
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
-  
-  <!-- AOS 動畫套件 -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     html, body {
-      height: 100%;
+      min-height: 100%;
       font-family: 'Noto Sans TC', sans-serif;
-      background: none;
-      position: relative;
+      background: #000;
       color: white;
+      position: relative;
     }
 
     body::before {
@@ -35,6 +27,7 @@
       background-position: center;
       background-repeat: no-repeat;
       z-index: -1;
+      opacity: 0.18;
     }
 
     .navbar {
@@ -61,14 +54,8 @@
     }
 
     @keyframes fadeInLeft {
-      0% {
-        transform: translateX(-30%);
-        opacity: 0;
-      }
-      100% {
-        transform: translateX(0);
-        opacity: 1;
-      }
+      0% { transform: translateX(-30%); opacity: 0; }
+      100% { transform: translateX(0); opacity: 1; }
     }
 
     .nav-links {
@@ -87,28 +74,14 @@
       transition: color 0.3s ease;
     }
 
-    .nav-links a:hover {
-      color: #aaa;
-    }
+    .nav-links a:hover { color: #aaa; }
 
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-    }
-
-    .hamburger div {
-      width: 25px;
-      height: 2px;
-      background: white;
-      transition: all 0.3s ease;
-    }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger div { width: 25px; height: 2px; background: white; transition: all 0.3s ease; }
 
     .mobile-menu {
       position: absolute;
-      top: 100%;
-      right: 0;
+      top: 100%; right: 0;
       background: rgba(0, 0, 0, 0.85);
       flex-direction: column;
       width: 100%;
@@ -120,13 +93,11 @@
       display: flex;
       transition: all 0.4s ease;
     }
-
     .mobile-menu.show {
       opacity: 1;
       transform: translateY(0);
       pointer-events: auto;
     }
-
     .mobile-menu a {
       padding: 1rem 0;
       text-decoration: none;
@@ -135,126 +106,97 @@
       letter-spacing: 0.15em;
       transition: color 0.3s ease;
     }
-
-    .mobile-menu a:hover {
-      color: #aaa;
-    }
-
+    .mobile-menu a:hover { color: #aaa; }
     @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-      }
-      .hamburger {
-        display: flex;
-      }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
     }
 
-    .about-info {
+    /* 影片區塊 */
+    .video-section {
+      width: 100vw;
+      height: 56vw;
+      max-height: 600px;
+      min-height: 250px;
       display: flex;
-      flex-wrap: wrap;
-      gap: 4rem;
-      justify-content: space-between;
-      max-width: 1200px;
-      margin: 140px auto 80px;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.35);
+      position: relative;
+      overflow: hidden;
+    }
+    .video-section video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border: none;
+      outline: none;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+      background: black;
+    }
+
+    .about-content {
+      max-width: 900px;
+      margin: 60px auto 0;
       padding: 0 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2.5rem;
     }
 
-    .section-left, .section-right {
-      flex: 1 1 45%;
-      min-width: 300px;
-    }
-    
-    .section-right {
-  padding: 3rem;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-}
-
-    .section-left h2 {
-      font-size: 0.9rem;
-      letter-spacing: 0.3em;
-      opacity: 0.6;
-      margin-bottom: 0.5rem;
+    .about-block {
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.13);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+      padding: 2.5rem 2rem;
+      margin-bottom: 2.5rem;
+      width: 100%;
     }
 
-    .section-left h1 {
-      font-size: 1.8rem;
+    .about-block h1, .about-block h2, .about-block h3 {
+      font-family: 'Playfair Display', serif;
       letter-spacing: 0.2em;
-      margin-bottom: 1.2rem;
-      line-height: 1.6;
-    }
-
-    .section-left p {
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      margin-bottom: 1.3rem;
-      line-height: 1.8;
-      opacity: 0.95;
-    }
-
- .email {
-  font-family: 'Playfair Display', serif;
-  font-size: 1rem;
-  letter-spacing: 0.15em;
-  opacity: 0.9;
-  margin-top: 2rem;
-  text-align: left;
-}
-
-    .section-right h3 {
-      font-size: 1rem;
-      letter-spacing: 0.25em;
       margin-bottom: 1rem;
-      text-transform: uppercase;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-      padding-bottom: 0.5rem;
+      color: #fff;
     }
+    .about-block h1 { font-size: 2.2rem; }
+    .about-block h2 { font-size: 1.2rem; opacity: 0.8; }
+    .about-block h3 { font-size: 1rem; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 0.5rem; }
 
-    .list {
-      list-style: none;
-      font-size: 0.95rem;
-      letter-spacing: 0.06em;
-      padding-left: 0;
-      margin-bottom: 2rem;
-      line-height: 1.8;
+    .about-block p, .about-block ul {
+      font-size: 1rem;
+      letter-spacing: 0.05em;
+      line-height: 2;
+      color: #fff;
+      opacity: 0.93;
     }
+    .about-block ul { margin-top: 1.2rem; margin-bottom: 1.2rem; }
+    .about-block ul li { margin-bottom: 0.7rem; }
 
-.company {
-  font-weight: 600;
-  letter-spacing: 0.12em;
-}
-
-.title {
-  font-weight: 400;
-  opacity: 0.8;
-  letter-spacing: 0.08em;
-}
-    
-    .list li {
-      margin-bottom: 0.8rem;
+    .email {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+      opacity: 0.9;
+      margin-top: 2rem;
+      text-align: left;
     }
+    .company { font-weight: 600; letter-spacing: 0.12em; }
+    .title { font-weight: 400; opacity: 0.8; letter-spacing: 0.08em; }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     @media (max-width: 768px) {
-      .about-info {
-        flex-direction: column;
-        gap: 2rem;
-        margin-top: 120px;
-        padding: 0 1.5rem;
-      }
+      .about-content { padding: 0 1rem; }
+      .about-block { padding: 2rem 1rem; }
+      .video-section { height: 55vw; min-height: 180px; }
     }
   </style>
 </head>
 <body>
-
   <nav class="navbar">
     <div class="logo">PORTFOLIO</div>
     <div class="nav-links">
@@ -274,44 +216,41 @@
     </div>
   </nav>
 
-  <div class="about-info">
-    <div class="section-left" data-aos="fade-up" data-aos-delay="100">
-      <h2>Brand Marketing</h2>
-      <h1>周俞成<br>MARCUS</h1>
-      <p>參與過劇情短片、紀錄片等拍攝，了解攝影器<br>
-      材和燈光設計，且能夠獨立進行企劃發想。目<br>
-      前任職於台灣瑪摩行銷部門，規劃各類影音剪<br>
-      輯，從製作精緻的社群視覺內容到短片剪輯。</p>
-      <p class="email">marks10820007@gmail.com</p>
+  <!-- 影片區塊 -->
+  <section class="video-section" data-aos="fade-up">
+    <video src="影片.mp4" autoplay loop muted playsinline></video>
+  </section>
+
+  <div class="about-content">
+    <div class="about-block" data-aos="fade-up" data-aos-delay="100">
+      <h1>奢侈品顧問Ⅹ故事創作｜構築品牌視覺靈魂</h1>
+      <h2>Brand marketing strategist with experience at luxury powerhouse Louis Vuitton,<br>dedicated to mastering aesthetic visual presentation.</h2>
+      <p>
+        品牌行銷規劃，結合奢侈品龍頭 Louis Vuitton 工作經驗，致力於掌握美學視覺呈現。<br>
+        影音創作｜內容創作｜平面設計｜企劃發想
+      </p>
     </div>
 
-    <div class="section-right" data-aos="fade-up" data-aos-delay="300">
+    <div class="about-block" data-aos="fade-up" data-aos-delay="300">
       <h3>experience</h3>
-      
-<ul class="list">
-  <li><span class="company">台灣瑪摩</span> – <span class="title">品牌行銷專員</span></li>
-  <li><span class="company">路易威登</span> – <span class="title">銷售顧問</span></li>
-  <li><span class="company">漾起</span> – <span class="title">行銷公關專員</span></li>
-</ul>
-
+      <ul>
+        <li><span class="company">台灣瑪摩</span> – <span class="title">品牌行銷專員</span></li>
+        <li><span class="company">路易威登</span> – <span class="title">銷售顧問</span></li>
+        <li><span class="company">漾起</span> – <span class="title">行銷公關專員</span></li>
+      </ul>
       <h3>skills</h3>
-      <ul class="list">
+      <ul>
         <li><strong>行銷</strong>：廣告投放、社群媒體操作、市場分析、異業合作、活動策劃、專案管理</li>
         <li><strong>影像處理</strong>：空拍、企劃、拍攝、剪輯、調色、基礎3D製作</li>
         <li><strong>學習</strong>：持續進修AI知識</li>
       </ul>
+      <p class="email">marks10820007@gmail.com</p>
     </div>
   </div>
 
-  <!-- AOS 動畫初始化 -->
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script>
-    AOS.init({
-      once: true,
-      duration: 1000,
-      easing: 'ease-out',
-    });
-
+    AOS.init({ once: true, duration: 1000, easing: 'ease-out' });
     function toggleMenu() {
       const menu = document.getElementById('mobileMenu');
       menu.classList.toggle('show');
