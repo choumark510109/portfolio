@@ -1,1 +1,81 @@
-<!DOCTYPE html> <html lang="zh-Hant"> <head> <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0"/> <title>CHOU MARCUS</title> <!-- 引入思源黑體 Noto Sans TC --> <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet"> <style> * { margin: 0; padding: 0; box-sizing: border-box; } html, body { height: 100%; font-family: 'Helvetica Neue', sans-serif; } /* 導覽列 */ .navbar { position: fixed; top: 0; left: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 2rem; z-index: 1000; } .logo { font-size: 1.2rem; line-height: 40px; height: 40px; color: white; font-weight: bold; font-family: 'Noto Sans TC', sans-serif; letter-spacing: 0.3em; animation: slideIn 0.8s ease forwards; opacity: 0; transform: translateX(-100%); } @keyframes slideIn { to { opacity: 1; transform: translateX(0); } } .nav-links { display: flex; gap: 2.5rem; } .nav-links a { text-decoration: none; color: white; font-size: 0.9rem; font-family: 'Noto Sans TC', sans-serif; letter-spacing: 0.15em; transition: color 0.3s ease; } .nav-links a:hover { color: #ccc; } .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; } .hamburger div { width: 25px; height: 2px; background: white; transition: all 0.3s ease; } .mobile-menu { position: absolute; top: 100%; right: 0; background: rgba(0, 0, 0, 0.85); flex-direction: column; width: 100%; text-align: right; padding: 1.5rem 2rem; opacity: 0; transform: translateY(-20px); pointer-events: none; display: flex; flex-direction: column; transition: all 0.4s ease; } .mobile-menu.show { opacity: 1; transform: translateY(0); pointer-events: auto; } .mobile-menu a { padding: 1rem 0; text-decoration: none; color: white; font-family: 'Noto Sans TC', sans-serif; font-size: 1rem; letter-spacing: 0.15em; transition: color 0.3s ease; } .mobile-menu a:hover { color: #ccc; } @media (max-width: 768px) { .nav-links { display: none; } .hamburger { display: flex; } } .background { position: fixed; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: -1; } #bgVideo { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; transition: opacity 1.5s ease; } .fade-out { opacity: 0; } #bgImage { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 2s ease; } .content { position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; z-index: 1; padding: 2rem; } .content h1 { font-size: 3rem; letter-spacing: 2px; margin-bottom: 1rem; } .content p { font-family: 'Noto Sans TC', sans-serif; font-size: 1rem; max-width: 600px; letter-spacing: 0.4em; } /* ============ 技能區塊樣式 ============ */ .skills-section { width: 100%; display: flex; flex-direction: row; margin-top: 3rem; } .skill { position: relative; flex: 1; height: 17vh; background-size: cover; background-position: center; display: flex; } .skill::after { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.45); z-index: 1; } .overlay-text { position: absolute; bottom: 45px; /* 距離底部 20px */ left: 30px; /* 距離左側 20px */ color: white; max-width: 80%; /* 限制最大寬度，避免跑版 */ text-align: left; padding: 0; /* 可依需求微調 */ z-index: 2; } .overlay-text h2 { font-size: 1.3rem; letter-spacing: 0.2em; margin-bottom: 1rem; } .overlay-text p { font-size: 0.7rem; line-height: 1.8; letter-spacing: 0.05em; font-family: 'Noto Sans TC', sans-serif; } @media (max-width: 768px) { .overlay-text h2 { font-size: 1rem; } .overlay-text p { font-size: 0.6rem; } } </style> </head> <body> <!-- 導覽列 --> <nav class="navbar"> <div class="logo">PORTFOLIO</div> <div class="nav-links"> <a href="index.html">HOME</a> <a href="work.html">WORK</a> <a href="about.html">ABOUT</a> </div> <div class="hamburger" onclick="toggleMenu()"> <div></div> <div></div> <div></div> </div> <div class="mobile-menu" id="mobileMenu"> <a href="index.html">HOME</a> <a href="work.html">WORK</a> <a href="about.html">ABOUT</a> </div> </nav> <!-- 背景容器 --> <div class="background"> <video id="bgVideo" autoplay muted playsinline> <source src="images/images/home/personalvideo2.mp4" type="video/mp4"> 您的瀏覽器不支援影片播放。 </video> <img id="bgImage" src="images/images/home/remix.png" alt="背景圖片"> </div> <!-- 內容區塊 --> <div class="content"> <h1>CHOU MARCUS</h1> <p>用影像與行銷構築視覺靈魂</p> </div> <!-- 技能區塊 --> <section class="skills-section"> <div class="skill" style="background-image: url('images/skills/video.jpg');"> <div class="overlay-text"> <h2>影音製作</h2> <p>從腳本、拍攝到後製，打造風格化的視覺敘事。</p> </div> </div> <div class="skill" style="background-image: url('images/skills/marketing.jpg');"> <div class="overlay-text"> <h2>行銷企劃</h2> <p>結合創意與策略，打造品牌聲量與社群流量。</p> </div> </div> <div class="skill" style="background-image: url('images/skills/design.jpg');"> <div class="overlay-text"> <h2>平面設計</h2> <p>擅長視覺統整與排版設計，強化內容表達。</p> </div> </div> </section> <!-- 控制動畫 --> <script> const video = document.getElementById('bgVideo'); const image = document.getElementById('bgImage'); video.onended = () => { video.classList.add('fade-out'); image.style.opacity = '1'; }; video.onerror = () => { video.style.display = 'none'; image.style.opacity = '1'; }; setTimeout(() => { if (video.readyState < 2) { video.style.display = 'none'; image.style.opacity = '1'; } }, 5000); function toggleMenu() { const menu = document.getElementById('mobileMenu'); menu.classList.toggle('show'); } </script> </body> </html>
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>精選影片作品首頁</title>
+  <style>
+    /* 基本 reset */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
+      font-family: sans-serif;
+    }
+
+    .video-section {
+      position: relative;
+      width: 100%;
+      height: 100vh; /* 滿螢幕高度 */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .video-section video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* 保持影片比例，覆蓋滿屏 */
+      z-index: 1;
+    }
+
+    .overlay-text {
+      position: absolute;
+      z-index: 2;
+      color: white;
+      font-size: 2rem;
+      text-align: center;
+      padding: 1rem;
+      text-shadow: 0 0 10px rgba(0,0,0,0.7);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 範例影片區塊 -->
+  <section class="video-section">
+    <video src="video1.mp4" muted loop playsinline></video>
+    <div class="overlay-text">作品名稱或簡短引言 1</div>
+  </section>
+
+  <section class="video-section">
+    <video src="video2.mp4" muted loop playsinline></video>
+    <div class="overlay-text">作品名稱或簡短引言 2</div>
+  </section>
+
+  <section class="video-section">
+    <video src="video3.mp4" muted loop playsinline></video>
+    <div class="overlay-text">作品名稱或簡短引言 3</div>
+  </section>
+
+  <script>
+    // 使用 Intersection Observer 控制滑入播放 / 滑出暫停
+    const videos = document.querySelectorAll('video');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.play();
+        } else {
+          entry.target.pause();
+        }
+      });
+    }, { threshold: 0.5 }); // 影片 50% 進入畫面才播放
+
+    videos.forEach(video => observer.observe(video));
+  </script>
+</body>
+</html>
