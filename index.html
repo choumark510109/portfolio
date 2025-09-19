@@ -5,6 +5,91 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>精選影片作品首頁</title>
   <style>
+    
+  /* 導覽列 */
+  .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 2rem;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 1.2rem;
+      line-height: 40px;
+      height: 40px;
+      color: white;
+      font-weight: bold;
+      letter-spacing: 0.3em;
+      animation: fadeInLeft 1s ease forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeInLeft {
+      0% { transform: translateX(-30%); opacity: 0; }
+      100% { transform: translateX(0); opacity: 1; }
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      opacity: 0;
+      animation: fadeIn 1.2s ease forwards;
+      animation-delay: 0.6s;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: white;
+      font-size: 0.9rem;
+      letter-spacing: 0.15em;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover { color: #aaa; }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger div { width: 25px; height: 2px; background: white; transition: all 0.3s ease; }
+
+    .mobile-menu {
+      position: absolute;
+      top: 100%; right: 0;
+      background: rgba(0, 0, 0, 0.85);
+      flex-direction: column;
+      width: 100%;
+      text-align: right;
+      padding: 1.5rem 2rem;
+      opacity: 0;
+      transform: translateY(-20px);
+      pointer-events: none;
+      display: flex;
+      transition: all 0.4s ease;
+    }
+    .mobile-menu.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .mobile-menu a {
+      padding: 1rem 0;
+      text-decoration: none;
+      color: white;
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+      transition: color 0.3s ease;
+    }
+    .mobile-menu a:hover { color: #aaa; }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    
     /* 基本 reset */
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -45,6 +130,27 @@
 </head>
 <body>
 
+<!-- 導覽列 --> 
+<nav class="navbar"> 
+<div class="logo">PORTFOLIO</div>
+ <div class="nav-links">
+ <a href="index.html">HOME</a> 
+<a href="work.html">WORK</a>
+ <a href="about.html">ABOUT</a> 
+</div> 
+<div class="hamburger" onclick="toggleMenu()"> 
+<div></div> 
+<div></div>
+ <div></div>
+ </div> 
+<div class="mobile-menu" id="mobileMenu">
+ <a href="index.html">HOME</a> 
+<a href="work.html">WORK</a>
+ <a href="about.html">ABOUT</a> 
+</div> 
+</nav>
+
+  
   <!-- 範例影片區塊 -->
   <section class="video-section">
     <video src="video1.mp4" muted loop playsinline></video>
