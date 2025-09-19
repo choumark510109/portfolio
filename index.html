@@ -6,8 +6,8 @@
   <title>精選影片作品首頁</title>
   <style>
     
-  /* 導覽列 */
-  .navbar {
+    /* 導覽列 */
+    .navbar {
       position: fixed;
       top: 0;
       left: 0;
@@ -25,40 +25,56 @@
       height: 40px;
       color: white;
       font-weight: bold;
+      font-family: 'Noto Sans TC', sans-serif;
       letter-spacing: 0.3em;
-      animation: fadeInLeft 1s ease forwards;
+      animation: slideIn 0.8s ease forwards;
       opacity: 0;
+      transform: translateX(-100%);
     }
 
-    @keyframes fadeInLeft {
-      0% { transform: translateX(-30%); opacity: 0; }
-      100% { transform: translateX(0); opacity: 1; }
+    @keyframes slideIn {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
     }
 
     .nav-links {
       display: flex;
       gap: 2.5rem;
-      opacity: 0;
-      animation: fadeIn 1.2s ease forwards;
-      animation-delay: 0.6s;
     }
 
     .nav-links a {
       text-decoration: none;
       color: white;
       font-size: 0.9rem;
+      font-family: 'Noto Sans TC', sans-serif;
       letter-spacing: 0.15em;
       transition: color 0.3s ease;
     }
 
-    .nav-links a:hover { color: #aaa; }
+    .nav-links a:hover {
+      color: #ccc;
+    }
 
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
-    .hamburger div { width: 25px; height: 2px; background: white; transition: all 0.3s ease; }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .hamburger div {
+      width: 25px;
+      height: 2px;
+      background: white;
+      transition: all 0.3s ease;
+    }
 
     .mobile-menu {
       position: absolute;
-      top: 100%; right: 0;
+      top: 100%;
+      right: 0;
       background: rgba(0, 0, 0, 0.85);
       flex-direction: column;
       width: 100%;
@@ -68,25 +84,37 @@
       transform: translateY(-20px);
       pointer-events: none;
       display: flex;
+      flex-direction: column;
       transition: all 0.4s ease;
     }
+
     .mobile-menu.show {
       opacity: 1;
       transform: translateY(0);
       pointer-events: auto;
     }
+
     .mobile-menu a {
       padding: 1rem 0;
       text-decoration: none;
       color: white;
+      font-family: 'Noto Sans TC', sans-serif;
       font-size: 1rem;
       letter-spacing: 0.15em;
       transition: color 0.3s ease;
     }
-    .mobile-menu a:hover { color: #aaa; }
+
+    .mobile-menu a:hover {
+      color: #ccc;
+    }
+
     @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .hamburger { display: flex; }
+      .nav-links {
+        display: none;
+      }
+      .hamburger {
+        display: flex;
+      }
     }
 
     
